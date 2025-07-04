@@ -35,7 +35,7 @@ const routes: Routes = [
     loadChildren: () =>
       import('./view/contacts/contacts.module').then((m) => m.ContactsModule),
   },
-  { path: '**', redirectTo: 'quizzes' }, // Переадресация на список квизов при неправильном пути
+  { path: '**', redirectTo: '/quizzes' }, // Переадресация на список квизов при неправильном пути
 ];
 
 @NgModule({
