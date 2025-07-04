@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html data-theme="dracula" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>QuizAppAng</title>
+    <base href="/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+  </head>
+  <body>
+    <app-root class="flex flex-col"></app-root>
+  </body>
+</html>
+<script>
+  if ("serviceWorker" in navigator) {
+    navigator.serviceWorker
+      .register("/ngsw-worker.js")
+      .then(() => console.log("Service Worker Registered"))
+      .catch((err) => console.error("Service Worker Registration Failed", err));
+  }
+</script>

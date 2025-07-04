@@ -1,0 +1,453 @@
+/* You can add global styles to this file, and also import other style files */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --bright-blue: oklch(51.01% 0.274 263.83);
+  --electric-violet: oklch(53.18% 0.28 296.97);
+  --french-violet: oklch(47.66% 0.246 305.88);
+  --vivid-pink: oklch(69.02% 0.277 332.77);
+  --main-pink: rgba(236, 72, 154, 0.8);
+  --hot-red: oklch(58.42% 0.238 15.34);
+  --orange-red: oklch(63.32% 0.24 31.68);
+
+  --gray-900: oklch(19.37% 0.006 300.98);
+  --gray-700: oklch(36.98% 0.014 302.71);
+  --gray-400: oklch(70.9% 0.015 304.04);
+
+  --dark: #000000;
+  --light: #ffffff;
+
+  --red-to-pink-to-purple-vertical-gradient: linear-gradient(
+    180deg,
+    var(--orange-red) 0%,
+    var(--vivid-pink) 50%,
+    var(--electric-violet) 100%
+  );
+
+  --red-to-pink-to-purple-horizontal-gradient: linear-gradient(
+    90deg,
+    var(--orange-red) 0%,
+    var(--vivid-pink) 50%,
+    var(--electric-violet) 100%
+  );
+
+  --purple-vertical-gradient: linear-gradient(
+    90deg,
+    var(--electric-violet) 0%,
+    var(--vivid-pink) 100%
+  );
+
+  --top-purple-vertical-gradient: linear-gradient(
+    0deg,
+    var(--vivid-pink) 0%,
+    var(--electric-violet) 100%
+  );
+
+  --purple-horizontal-gradient: linear-gradient(
+    180deg,
+    var(--electric-violet) 0%,
+    var(--vivid-pink) 100%
+  );
+}
+
+.router-link-active {
+  background-color: var(--vivid-pink);
+}
+
+[data-theme="dracula"] {
+  --card-gradient: linear-gradient(380deg, var(--dark), transparent);
+}
+[data-theme="bumblebee"] {
+  --card-gradient: linear-gradient(380deg, var(--light), transparent);
+}
+.random-hover-1 {
+  background: var(--bright-blue);
+}
+
+.random-hover-2 {
+  background: var(--electric-violet);
+}
+
+.random-hover-3 {
+  background: var(--french-violet);
+}
+
+.random-hover-4 {
+  background: var(--vivid-pink);
+}
+.random-hover-5 {
+  background: var(--hot-red);
+}
+.random-hover-6 {
+  background: var(--orange-red);
+}
+.bg-base-1 {
+  background: #282a36;
+  z-index: 1;
+  position: relative;
+}
+.bg-base-2 {
+  background-color: #cc26d5;
+  z-index: 1;
+  position: relative;
+}
+.bg-base-3 {
+  background: #cc26d578;
+  z-index: 1;
+  position: relative;
+}
+.bg-base-gradient {
+  background: linear-gradient(0deg, #f0060b, #f0070c, #cc26d5, #7702ff);
+  z-index: 1;
+  position: relative;
+}
+.bg-gradient-primary-0 {
+  background: linear-gradient(
+    0deg,
+    #f0060b,
+    #f0070c,
+    #cc26d5,
+    #7702ff
+  ) !important;
+}
+.bg-gradient-primary-90 {
+  background: linear-gradient(
+    90deg,
+    #f0060b,
+    #f0070c,
+    #cc26d5,
+    #7702ff
+  ) !important;
+}
+.bg-gradient-primary-180 {
+  background: linear-gradient(
+    180deg,
+    #f0060b,
+    #f0070c,
+    #cc26d5,
+    #7702ff
+  ) !important;
+}
+.bg-gradient-primary-240 {
+  background: linear-gradient(
+    240deg,
+    #f0060b,
+    #f0070c,
+    #cc26d5,
+    #7702ff
+  ) !important;
+}
+.bg-gradient-primary-360 {
+  background: linear-gradient(
+    360deg,
+    #f0060b,
+    #f0070c,
+    #cc26d5,
+    #7702ff
+  ) !important;
+}
+.bg-gradient-base-0 {
+  background: linear-gradient(0deg, #282a36, #414557);
+}
+.bg-gradient-base-90 {
+  background: linear-gradient(90deg, #282a36, #414557);
+}
+.bg-gradient-base-180 {
+  background: linear-gradient(180deg, #282a36, #414557);
+}
+.bg-gradient-base-240 {
+  background: linear-gradient(240deg, #282a36, #414557);
+}
+.bg-gradient-base-360 {
+  background: linear-gradient(360deg, #282a36, #414557);
+}
+.bg-gradient-regular-0 {
+  background: linear-gradient(90deg, #7802ff8a, #cc26d583) !important;
+}
+.bg-gradient-regular-90 {
+  background: linear-gradient(90deg, #cc26d5c1, #7802ffb0) !important;
+}
+.bg-gradient-regular-180 {
+  background: linear-gradient(180deg, #7702ff, #cc26d5);
+}
+.bg-gradient-regular-240 {
+  background: linear-gradient(240deg, #7702ff, #cc26d5);
+}
+.bg-gradient-regular-360 {
+  background: linear-gradient(360deg, #7702ff, #cc26d5);
+}
+.bg-gradient-reg-transp-90 {
+  background: linear-gradient(90deg #7702ff, #7802ff2c) !important;
+}
+.bg-gradient-reg-transp-180 {
+  background: linear-gradient(180deg #7702ff, #7802ff2c);
+}
+.bg-gradinet-accent-0 {
+  background: linear-gradient(90deg, #cc26d5, #cc26d52c) !important;
+}
+.bg-gradinet-accent-90 {
+  background: linear-gradient(90deg, #cc26d5, #cc26d52c);
+}
+.bg-gradinet-accent-180 {
+  background: linear-gradient(180deg, #cc26d5, #cc26d52c);
+}
+.bg-gradinet-accent-240 {
+  background: linear-gradient(240deg, #cc26d5, #cc26d52c);
+}
+.bg-gradinet-red-0 {
+  background: linear-gradient(90deg, #f0070bad, #f0070b2b) !important;
+}
+.bg-gradinet-red-90 {
+  background: linear-gradient(90deg, #cc26d5, #f0070b2b) !important;
+}
+.bg-red-v {
+  background: #f0070c;
+}
+.bg-accent-v {
+  background: #cc26d5;
+}
+.bg-regular-v {
+  background: #7702ff;
+}
+.color-red {
+  color: #f0070c;
+}
+.color-accent {
+  color: #cc26d5;
+}
+.color-regular {
+  color: #7702ff;
+}
+
+.color-light {
+  color: white;
+}
+.color-dark {
+  color: #282a36;
+}
+.color-dark-opacity {
+  color: #282a3680;
+}
+.color-dark-green-tea {
+  color: #7fde82;
+}
+.color-dark-haki {
+  color: #477b49;
+}
+.color-dark-black {
+  color: #000000;
+}
+.color-dark-gray {
+  color: #414557;
+}
+.logo {
+  width: 50px;
+  height: 50px;
+}
+.glass {
+  background-image: none;
+}
+.container {
+  margin: 0 auto;
+  padding: 0 20px;
+}
+.h-space {
+  padding-top: 145px;
+}
+.card-gradient-dark {
+  background-image: linear-gradient(380deg, black, transparent);
+}
+.card-gradient-light {
+  background-image: linear-gradient(380deg, white, transparent);
+}
+.nav-controll {
+  background: transparent;
+  backdrop-filter: blur(40px);
+  -webkit-backdrop-filter: blur(40px);
+  border-radius: 50%;
+}
+.icon {
+  fill: var(--base-100);
+}
+.accent-hover:hover {
+  background-color: var(--vivid-pink);
+}
+.card {
+  .card-title {
+    justify-content: center;
+    padding-top: 10px;
+    color: #ffffff;
+  }
+}
+.quiz-container {
+  width: 60%;
+  margin: 0 auto;
+}
+
+.loading {
+  width: 300px;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  position: fixed;
+  z-index: 99;
+}
+
+@media (max-width: 1024px) {
+  .fast-play {
+    left: 17% !important;
+    height: 2rem;
+    svg {
+      width: 2rem;
+      height: 2rem;
+    }
+  }
+  .quiz-theme {
+    right: 17% !important;
+    height: 2rem;
+    svg {
+      width: 2rem;
+      height: 2rem;
+    }
+  }
+  .header {
+    .navbar {
+      width: 99% !important;
+    }
+    .nav-menu {
+      top: 80px !important;
+      padding: 10px;
+      // background: var(--main-pink) !important;
+    }
+    .nav-menu.show {
+      left: 0% !important;
+    }
+  }
+  .quiz-list {
+    min-height: 100vh;
+    .quiz-list-wrapper {
+      gap: 20px;
+    }
+    .card-body {
+      padding: 0px 20px 30px;
+
+      h2 {
+        font-size: 22px;
+      }
+      p {
+        font-size: 14px;
+      }
+    }
+  }
+  .quiz-detail {
+    min-height: 80dvh;
+    .card {
+      .card-body {
+        padding: 1rem;
+      }
+      h2 {
+        font-size: 22px;
+        padding: 20px;
+      }
+      p {
+        font-size: 14px;
+        padding: 0 20px;
+      }
+      .img-wrapper {
+        height: 25dvh !important;
+      }
+      img {
+        max-width: 80%;
+      }
+      span {
+        padding: 5px 0;
+      }
+    }
+  }
+  .quiz-play {
+    padding-top: 0 !important;
+    h1 {
+      font-size: 20px;
+      padding-bottom: 0;
+    }
+    h2 {
+      font-size: 22px;
+      padding: 0;
+    }
+    .quiz-play-quistion {
+      min-height: 25dvh !important;
+      h3 {
+        font-size: 22px;
+        text-align: center;
+      }
+    }
+    .quiz-play-answers-list {
+      width: 80% !important;
+    }
+  }
+  .quiz-result {
+    .form {
+      width: 90%;
+    }
+    .form-wrapper {
+      padding: 20px;
+      .input {
+        outline-color: #7702ff !important;
+      }
+    }
+    h2 {
+      font-size: 24px;
+      padding-bottom: 20px;
+      line-height: 30px;
+      text-shadow: 0 0 20px white, 0 0 40px white;
+    }
+  }
+  .footer {
+    // padding: 25px 0;
+    .logo {
+      width: 100px;
+      height: 100px;
+    }
+  }
+  .container {
+    padding: 0 10px;
+  }
+  .quiz-container {
+    width: 100%;
+  }
+  .card-body {
+    position: relative;
+    .collapse {
+      padding-top: 0;
+      gap: 20px;
+    }
+  }
+  .card-body-header {
+    width: 90%;
+    margin: 0 auto;
+  }
+}
+@media (max-width: 768px) {
+  .quiz-detail {
+    .card-body {
+      position: relative;
+      .collapse {
+        padding-top: 0;
+        gap: 20px;
+      }
+    }
+    .card-body-header {
+      width: 85%;
+      margin: 0 auto;
+    }
+  }
+  .text-3xl {
+    font-size: 1.5rem;
+  }
+}
+
+app-quiz-single {
+  min-height: 80vh;
+}

@@ -1,0 +1,42 @@
+.quiz-list {
+  .container {
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: 40px 0;
+  }
+  .card:hover {
+    box-shadow: 0 0 3em white;
+    cursor: pointer;
+    transition: 0.3s ease-in-out;
+  }
+  .card:active {
+    transform: scale(0.98);
+    transition: 0.1s ease-in-out;
+  }
+  .quiz-list-wrapper {
+    gap: 10px;
+    width: 84%;
+    margin: 0 auto;
+  }
+  .quiz-item img {
+    // aspect-ratio: 16 / 8;
+    object-fit: cover;
+    width: 100%;
+    height: auto;
+  }
+  .quiz-item {
+    flex: 33%;
+  }
+  .btn-card {
+    width: 100%;
+    border-radius: 0 0 15px 15px;
+  }
+  .btn:active:focus {
+    transform: none;
+  }
+  .btn img {
+    width: 100%;
+    height: auto;
+    aspect-ratio: auto;
+  }
+}

@@ -1,0 +1,55 @@
+.header {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+
+  .logo {
+    scale: 3.1;
+    &:hover {
+      scale: 2.3;
+      transition: 0.3s ease-in-out;
+    }
+  }
+  .logo-link {
+    z-index: -1;
+  }
+  .navbar {
+    width: 80%;
+    border-radius: 20px;
+    position: fixed;
+    margin: 40px 0;
+    z-index: 99;
+  }
+  .navbar-center {
+  }
+  .nav-menu {
+    position: absolute;
+    top: 0;
+    right: 1000px;
+    z-index: -1;
+    visibility: hidden;
+    opacity: 0;
+    transition: right 0.3s ease-in-out, opacity 0.2s ease-in-out;
+  }
+  .navbar-end {
+    z-index: -1;
+  }
+
+  .nav-menu.show {
+    top: -10px !important;
+    left: 100% !important;
+    z-index: 999999;
+    visibility: visible;
+    opacity: 1;
+    transition: right 0.3s ease-in-out, opacity 0.2s ease-in-out;
+    width: fit-content;
+    background: black;
+    border-radius: 20px;
+  }
+  .nav-dropdown.glass {
+    box-shadow: none;
+  }
+}
+.fast-play {
+  display: none;
+}

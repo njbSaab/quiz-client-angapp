@@ -1,0 +1,79 @@
+<div class="quiz-play" *ngIf="quiz; else notFound" appChangeBackground>
+  <div class="container">
+    <h1 class="text-center text-3xl py-5">{{ quiz.title }}</h1>
+
+    <!-- Анимация для вопроса -->
+    <div
+      class="quiz-play-quistion bg-gradient-base-180 flex flex-col items-center justify-center relative quiz-container"
+      [@questionFadeIn]="currentQuestionIndex"
+      *ngIf="currentQuestionIndex < questions.length; else finished"
+    >
+      <div class="timer-box">
+        <div
+          class="radial-progress bg-base-100"
+          [style.--value]="progress"
+          role="progressbar"
+          [ngClass]="{
+            'text-error': currentTime < 5,
+            'text-accent': currentTime >= 5 && currentTime < 10,
+            'text-primary': currentTime >= 10
+          }"
+        >
+          <span class="countdown font-mono text-3xl">
+            <span [style.--value]="currentTime"></span>
+          </span>
+        </div>
+      </div>
+
+      <div class="quistion-text">
+        <h3 class="text-2xl">{{ questions[currentQuestionIndex].text }}</h3>
+        <img
+          *ngIf="questions[currentQuestionIndex].image"
+          [src]="questions[currentQuestionIndex].image"
+          alt="Question image"
+        />
+      </div>
+    </div>
+
+    <ul
+      class="quiz-play-answers-list quiz-container"
+      [@answersFadeIn]="currentQuestionIndex"
+      *ngIf="isAnswerVisible && currentQuestionIndex < questions.length"
+    >
+      <li
+        *ngFor="let answer of questions[currentQuestionIndex]?.answers"
+        (click)="onAnswerSelect(answer)"
+        appRandomBackground
+        class="quiz-play-answers-item bg-gradient-base-0 flex items-center justify-center cursor-pointer text-center"
+      >
+        {{ answer.text }}
+      </li>
+    </ul>
+  </div>
+</div>
+
+<ng-template #finished>
+  <div class="text-center">
+    <h2 class="text-3xl py-5">Викторина завершена!</h2>
+    <p *ngIf="quiz?.finalPage">{{ quiz?.finalPage }}</p>
+    <div class="btn-grup flex flex-col gap-3 max-w-[400px] mx-auto">
+      <button class="btn btn-ghost" (click)="resetProgress()">
+        Начать заново
+      </button>
+      <button
+        [routerLink]="['/quiz', quiz?.id, 'result']"
+        class="btn btn-success"
+      >
+        Получить результат
+      </button>
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #notFound>
+  <div class="loading-container text-center">
+    <span class="loading loading-ring text-accent loading-lg"></span>
+    <span class="loading loading-ring text-regular loading-md"></span>
+    <p class="text-2xl text-white text-center">Загрузка...</p>
+  </div>
+</ng-template>

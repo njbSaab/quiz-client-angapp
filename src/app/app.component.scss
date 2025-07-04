@@ -1,0 +1,18 @@
+.quiz-theme {
+  position: fixed;
+  top: 50px;
+  right: 50px;
+  z-index: 999;
+  display: none;
+}
+.fast-play {
+  position: fixed;
+  left: 50px;
+  top: 50px;
+  display: flex;
+  align-content: center;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+  display: none;
+}

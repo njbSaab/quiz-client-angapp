@@ -1,0 +1,121 @@
+<div *ngIf="quiz; else notFound" class="quiz-detail h-space">
+  <div class="card bg-gradient-base-180 pt-4">
+    <div class="img-wrapper" [@blurIn]>
+      <figure
+        class="relative z-10 relative img-stack-wrapper"
+        [routerLink]="['/quiz', quiz.id, 'play']"
+      >
+        <img
+          *ngIf="quiz.img"
+          class="rounded-box"
+          [src]="quiz.img"
+          alt="{{ quiz.title }}"
+        />
+        <img
+          *ngIf="quiz.img"
+          class="rounded-box absolute"
+          [src]="quiz.img"
+          alt="{{ quiz.title }}"
+        />
+        <img
+          *ngIf="quiz.img"
+          class="rounded-box absolute"
+          [src]="quiz.img"
+          alt="{{ quiz.title }}"
+        />
+        <img
+          *ngIf="quiz.img"
+          class="rounded-box absolute"
+          [src]="quiz.img"
+          alt="{{ quiz.title }}"
+        />
+        <img
+          *ngIf="quiz.img"
+          class="rounded-box absolute"
+          [src]="quiz.img"
+          alt="{{ quiz.title }}"
+        />
+        <img
+          *ngIf="quiz.img"
+          class="rounded-box absolute"
+          [src]="quiz.img"
+          alt="{{ quiz.title }}"
+        />
+        <img
+          *ngIf="quiz.img"
+          class="rounded-box absolute"
+          [src]="quiz.img"
+          alt="{{ quiz.title }}"
+        />
+      </figure>
+    </div>
+    <div class="card-body pt-0 quiz-container" (click)="arrowHide()">
+      <div class="details flex justify-between">
+        <div class="card-body-header flex justify-between items-center">
+          <span class="text-sm text-green-400">{{
+            quiz.createdAt | date
+          }}</span>
+          <div class="rating">
+            <input
+              *ngFor="let star of [1, 2, 3, 4, 5]; let i = index"
+              type="radio"
+              name="rating-{{ quiz.id }}"
+              class="mask mask-star text-accent bg-accent"
+              [ngClass]="{ filled: i < (quiz.rate || 0) }"
+            />
+          </div>
+        </div>
+      </div>
+      <div
+        class="collapse bg-gradient-base-180 text-center cursor-pointer hover:bg-gradient-base-180"
+      >
+        <input type="radio" name="my-accordion-1" />
+        <div class="collapse-title pb-0">
+          <h2 class="card-title">{{ quiz.title }}</h2>
+          <p>{{ quiz.description }}</p>
+          <span
+            class="text-center flex justify-center items-center"
+            *ngIf="isArrow"
+          >
+            <img
+              src="https://icongr.am/feather/chevron-down.svg?size=50&color=c7c7c7"
+              alt=""
+            />
+          </span>
+        </div>
+        <div class="collapse-content">
+          <p class="pt-2">
+            {{
+              quiz.firstPage
+                ? quiz.firstPage.split("_")[0].replace("img-", "")
+                : ""
+            }}
+          </p>
+        </div>
+        <div
+          class="btn btn-accent btn-single"
+          [routerLink]="['/quiz', quiz.id, 'play']"
+        >
+          <span>
+            <svg
+              class="h-10 w-10 fill-current"
+              xmlns="http://www.w3.org/2000/svg"
+              width="32"
+              height="32"
+              viewBox="0 0 24 24"
+            >
+              <path d="M8 5v14l11-7z" />
+            </svg>
+          </span>
+          Играть
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ng-template #notFound>
+  <div class="text-center pt-[50px]">
+    <p class="text-2xl text-red-600">Упс, квиз не найден.</p>
+  </div>
+</ng-template>

@@ -1,0 +1,61 @@
+<div class="quiz-list h-space">
+  <ng-container *ngIf="quizzes?.length; else loading">
+    <div class="container bg-gradient-primary-0 rounded-box py-5">
+      <div
+        class="quiz-list-wrapper flex flex-wrap flex-col md:flex-row"
+        [@listAnimation]
+      >
+        <div
+          class="card quiz-item bg-card-gradient"
+          *ngFor="let quiz of quizzes"
+          [routerLink]="['/quiz', quiz.id]"
+        >
+          <figure>
+            <img *ngIf="quiz.img" [src]="quiz.img" alt="{{ quiz.title }}" />
+          </figure>
+          <div class="card-body">
+            <div class="card-body-header flex justify-between items-center">
+              <span class="text-sm text-green-400">{{
+                quiz.createdAt | date
+              }}</span>
+              <div class="rating">
+                <input
+                  *ngFor="let star of [1, 2, 3, 4, 5]; let i = index"
+                  type="radio"
+                  name="rating-{{ quiz.id }}"
+                  class="mask mask-star text-accent bg-accent"
+                  [ngClass]="{ filled: i < (quiz.rate || 0) }"
+                />
+              </div>
+            </div>
+            <h2 class="card-title">{{ quiz.title }}</h2>
+            <p>{{ quiz.description }}</p>
+          </div>
+          <div class="card-actions justify-end card-footer">
+            <button class="btn btn-accent btn-card text-base-200">
+              <span>
+                <svg
+                  class="h-10 w-10 fill-current"
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="32"
+                  height="32"
+                  viewBox="0 0 24 24"
+                >
+                  <path d="M8 5v14l11-7z" />
+                </svg>
+              </span>
+              Играть сейчас!
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </ng-container>
+
+  <ng-template #loading>
+    <div class="loading-container text-center">
+      <span class="loading loading-ring text-accent loading-lg"></span>
+      <span class="loading loading-ring text-regular loading-md"></span>
+    </div>
+  </ng-template>
+</div>

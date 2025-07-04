@@ -1,0 +1,39 @@
+.quiz-result {
+  border-radius: 20px;
+  form {
+    border-radius: 20px;
+    max-width: 400px;
+    margin: 0 auto;
+    overflow: hidden;
+  }
+  .form-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+    padding: 40px;
+  }
+  small {
+    position: absolute;
+    top: -22.5px;
+  }
+  .btn {
+    width: 100%;
+    boreder-radius: 0 !important;
+    height: 55px;
+    font-size: 15px;
+  }
+  .btn:active {
+    transform: scale(1);
+  }
+}
+.quiz-result.h-space {
+  padding: 70px 0;
+  margin-top: 150px;
+}
+
+@media (max-width: 768px) {
+  .quiz-result.h-space {
+    padding: 40px 0;
+    margin-top: 150px;
+  }
+}
