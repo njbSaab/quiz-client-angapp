@@ -1,6 +1,7 @@
 [build]
   command = "ng build"
-  publish = "dist/quiz-app-ang" # Укажите вашу папку сборки, например, dist/quiz-app
+  publish = "dist/quiz-app-ang/browser" # Измените на dist/quiz-app-ang/browser
+  base = "."
 
 [[redirects]]
   from = "/*"
