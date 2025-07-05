@@ -1,19 +1,20 @@
+import { NgModule } from '@angular/core';
+import { RouterModule, Routes, ExtraOptions } from '@angular/router';
+import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 import { ContactsModule } from './view/contacts/contacts.module';
 import { AboutModule } from './view/about/about.module';
-import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
-  { path: '', redirectTo: 'quizzes', pathMatch: 'full' }, // Редирект на список квизов
+  { path: '', redirectTo: 'quizzes', pathMatch: 'full' },
   {
     path: 'quizzes',
     loadChildren: () =>
-      import('./view/quiz-list/quiz-list.module').then((m) => m.QuizListModule), // Ленивый загрузчик для модуля списка квизов
+      import('./view/quiz-list/quiz-list.module').then((m) => m.QuizListModule),
   },
   {
     path: 'quiz/:id',
     loadChildren: () =>
-      import('./view/quiz-single/quiz-single.module').then((m) => m.QuizSingleModule), // Ленивый загрузчик для модуля одного квиза
+      import('./view/quiz-single/quiz-single.module').then((m) => m.QuizSingleModule),
   },
   {
     path: 'quiz/:id/play',
@@ -35,11 +36,18 @@ const routes: Routes = [
     loadChildren: () =>
       import('./view/contacts/contacts.module').then((m) => m.ContactsModule),
   },
-  { path: '**', redirectTo: '/quizzes' }, // Переадресация на список квизов при неправильном пути
+  { path: '**', redirectTo: '/quizzes', pathMatch: 'full' },
 ];
 
+const routerOptions: ExtraOptions = {
+  useHash: true, // Включаем хэш-маршрутизацию
+};
+
 @NgModule({
-  imports: [RouterModule.forRoot(routes)], // Настройка маршрутов для основного приложения
-  exports: [RouterModule], // Экспортируем RouterModule, чтобы он мог использоваться в AppModule
+  imports: [RouterModule.forRoot(routes, routerOptions)],
+  exports: [RouterModule],
+  providers: [
+    { provide: LocationStrategy, useClass: HashLocationStrategy } // Используем HashLocationStrategy
+  ],
 })
 export class AppRoutingModule {}

@@ -2,7 +2,7 @@
   <ng-container *ngIf="quizzes?.length; else loading">
     <div class="container bg-gradient-primary-0 rounded-box py-5">
       <div
-        class="quiz-list-wrapper flex flex-wrap flex-col md:flex-row"
+        class="quiz-list-wrapper grid grid-cols-1 sm:grid-cols-2"
         [@listAnimation]
       >
         <div

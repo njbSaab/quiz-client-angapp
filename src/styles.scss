@@ -294,6 +294,9 @@
   position: fixed;
   z-index: 99;
 }
+.quiz-detail .card .card-body {
+  max-width: 800px;
+}
 
 @media (max-width: 1024px) {
   .fast-play {
@@ -312,23 +315,14 @@
       height: 2rem;
     }
   }
-  .header {
-    .navbar {
-      width: 99% !important;
-    }
-    .nav-menu {
-      top: 80px !important;
-      padding: 10px;
-      // background: var(--main-pink) !important;
-    }
-    .nav-menu.show {
-      left: 0% !important;
-    }
-  }
   .quiz-list {
     min-height: 100vh;
     .quiz-list-wrapper {
       gap: 20px;
+      width: 96% !important;
+    }
+    .quiz-item img {
+      height: 200px !important;
     }
     .card-body {
       padding: 0px 20px 30px;

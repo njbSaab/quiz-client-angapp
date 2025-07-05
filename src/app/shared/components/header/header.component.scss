@@ -14,7 +14,8 @@
     z-index: -1;
   }
   .navbar {
-    width: 80%;
+    width: 100%;
+    max-width: 800px;
     border-radius: 20px;
     position: fixed;
     margin: 40px 0;
@@ -29,6 +30,7 @@
     z-index: -1;
     visibility: hidden;
     opacity: 0;
+    padding: 10px;
     transition: right 0.3s ease-in-out, opacity 0.2s ease-in-out;
   }
   .navbar-end {
@@ -52,4 +54,19 @@
 }
 .fast-play {
   display: none;
+}
+
+@media (max-width: 1024px) {
+  .header {
+    .navbar {
+      width: 99% !important;
+    }
+    .nav-menu {
+      top: 80px !important;
+      // background: var(--main-pink) !important;
+    }
+    .nav-menu.show {
+      left: 110% !important;
+    }
+  }
 }

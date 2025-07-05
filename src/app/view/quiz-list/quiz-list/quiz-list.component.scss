@@ -15,14 +15,15 @@
   }
   .quiz-list-wrapper {
     gap: 10px;
-    width: 84%;
+    max-width: 800px;
+    width: 100%;
     margin: 0 auto;
   }
   .quiz-item img {
     // aspect-ratio: 16 / 8;
-    object-fit: cover;
+    object-fit: contain;
     width: 100%;
-    height: auto;
+    height: 300px;
   }
   .quiz-item {
     flex: 33%;
