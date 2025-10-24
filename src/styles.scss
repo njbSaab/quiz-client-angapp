@@ -163,6 +163,10 @@
 .bg-gradient-base-180 {
   background: linear-gradient(180deg, #282a36, #414557);
 }
+//
+.bg-gradient-blue-180 {
+  background: linear-gradient(180deg, #090f1e, #090f1e2d);
+}
 .bg-gradient-base-240 {
   background: linear-gradient(240deg, #282a36, #414557);
 }
@@ -209,7 +213,10 @@
   background: linear-gradient(90deg, #cc26d5, #f0070b2b) !important;
 }
 .bg-red-v {
-  background: #077bd3;
+  background: #cc26d556;
+}
+.card .filled {
+  background: #0886e6 !important;
 }
 .bg-accent-v {
   background: #cc26d5;

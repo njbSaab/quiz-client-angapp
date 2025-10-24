@@ -25,6 +25,6 @@ export interface Quiz {
   updatedAt: string;
   questions: Question[];
   categoryId?: number;
-  img?: string; // Добавляем поле для URL изображения
-  rate?: number; // Добавляем поле для рейтинга
+  img?: string;
+  rating?: number; 
 }

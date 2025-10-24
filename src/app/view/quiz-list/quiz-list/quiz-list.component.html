@@ -27,8 +27,8 @@
                   *ngFor="let star of [1, 2, 3, 4, 5]; let i = index"
                   type="radio"
                   name="rating-{{ quiz.id }}"
-                  class="mask mask-star text-accent bg-accent"
-                  [ngClass]="{ filled: i < (quiz.rate || 0) }"
+                  class="mask mask-star bg-red-v"
+                  [ngClass]="{ filled: i < (quiz.rating || 0) }"
                 />
               </div>
             </div>
