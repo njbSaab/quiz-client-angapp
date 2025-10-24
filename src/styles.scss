@@ -53,14 +53,25 @@
 }
 
 .router-link-active {
-  background-color: var(--vivid-pink);
+  background-color: #077bd3 !important;
 }
-
+.result-wrapper .btn-primary {
+  background-color: #077bd3 !important;
+  // color: #ffffff !important;
+  outline-color: #077bd3 !important;
+  border-color: #077bd3 !important;
+}
 [data-theme="dracula"] {
   --card-gradient: linear-gradient(380deg, var(--dark), transparent);
+  background: #090f1e !important;
 }
 [data-theme="bumblebee"] {
   --card-gradient: linear-gradient(380deg, var(--light), transparent);
+}
+.quiz-play {
+  background: #1b2642 !important;
+  // background: linear-gradient(380deg, ##090f1e, transparent) !important;
+  // background: linear-gradient(380deg, #0a0e2f, transparent) !important;
 }
 .random-hover-1 {
   background: var(--bright-blue);
@@ -99,53 +110,48 @@
   position: relative;
 }
 .bg-base-gradient {
-  background: linear-gradient(0deg, #f0060b, #f0070c, #cc26d5, #7702ff);
+  background: linear-gradient(
+    0deg,
+    #cc26d5,
+    hsl(268, 100%, 50%),
+    #077bd3
+  ) !important;
   z-index: 1;
   position: relative;
 }
 .bg-gradient-primary-0 {
-  background: linear-gradient(
-    0deg,
-    #f0060b,
-    #f0070c,
-    #cc26d5,
-    #7702ff
-  ) !important;
+  background: linear-gradient(180deg, #077bd3, #cc26d52c);
 }
 .bg-gradient-primary-90 {
   background: linear-gradient(
     90deg,
-    #f0060b,
-    #f0070c,
     #cc26d5,
-    #7702ff
+    hsl(268, 100%, 50%),
+    #077bd3
   ) !important;
 }
 .bg-gradient-primary-180 {
   background: linear-gradient(
     180deg,
-    #f0060b,
-    #f0070c,
     #cc26d5,
-    #7702ff
+    hsl(268, 100%, 50%),
+    #077bd3
   ) !important;
 }
 .bg-gradient-primary-240 {
   background: linear-gradient(
     240deg,
-    #f0060b,
-    #f0070c,
     #cc26d5,
-    #7702ff
+    hsl(268, 100%, 50%),
+    #077bd3
   ) !important;
 }
 .bg-gradient-primary-360 {
   background: linear-gradient(
     360deg,
-    #f0060b,
-    #f0070c,
     #cc26d5,
-    #7702ff
+    hsl(268, 100%, 50%),
+    #077bd3
   ) !important;
 }
 .bg-gradient-base-0 {
@@ -164,16 +170,16 @@
   background: linear-gradient(360deg, #282a36, #414557);
 }
 .bg-gradient-regular-0 {
-  background: linear-gradient(90deg, #7802ff8a, #cc26d583) !important;
+  background: linear-gradient(90deg, #7802ff8a, #077bd3) !important;
 }
 .bg-gradient-regular-90 {
   background: linear-gradient(90deg, #cc26d5c1, #7802ffb0) !important;
 }
 .bg-gradient-regular-180 {
-  background: linear-gradient(180deg, #7702ff, #cc26d5);
+  background: linear-gradient(180deg, #7702ff, #077bd3);
 }
 .bg-gradient-regular-240 {
-  background: linear-gradient(240deg, #7702ff, #cc26d5);
+  background: linear-gradient(240deg, #077bd3, #cc26d5);
 }
 .bg-gradient-regular-360 {
   background: linear-gradient(360deg, #7702ff, #cc26d5);
@@ -185,25 +191,25 @@
   background: linear-gradient(180deg #7702ff, #7802ff2c);
 }
 .bg-gradinet-accent-0 {
-  background: linear-gradient(90deg, #cc26d5, #cc26d52c) !important;
+  background: linear-gradient(90deg, #077bd3, #cc26d52c) !important;
 }
 .bg-gradinet-accent-90 {
   background: linear-gradient(90deg, #cc26d5, #cc26d52c);
 }
 .bg-gradinet-accent-180 {
-  background: linear-gradient(180deg, #cc26d5, #cc26d52c);
+  background: linear-gradient(180deg, #077bd3, #077bd32c);
 }
 .bg-gradinet-accent-240 {
   background: linear-gradient(240deg, #cc26d5, #cc26d52c);
 }
 .bg-gradinet-red-0 {
-  background: linear-gradient(90deg, #f0070bad, #f0070b2b) !important;
+  background: linear-gradient(90deg, #077bd3, #f0070b2b) !important;
 }
 .bg-gradinet-red-90 {
   background: linear-gradient(90deg, #cc26d5, #f0070b2b) !important;
 }
 .bg-red-v {
-  background: #f0070c;
+  background: #077bd3;
 }
 .bg-accent-v {
   background: #cc26d5;
@@ -215,7 +221,7 @@
   color: #f0070c;
 }
 .color-accent {
-  color: #cc26d5;
+  color: #077bd3;
 }
 .color-regular {
   color: #7702ff;
@@ -271,9 +277,6 @@
 .icon {
   fill: var(--base-100);
 }
-.accent-hover:hover {
-  background-color: var(--vivid-pink);
-}
 .card {
   .card-title {
     justify-content: center;
@@ -297,6 +300,51 @@
 .quiz-detail .card .card-body {
   max-width: 800px;
 }
+// .confity-img {
+//   position: relative;
+//   &::after {
+//     content: "";
+//     background-image: url("https://www.pngall.com/wp-content/uploads/2016/07/Confetti-PNG-HD.png");
+//     position: absolute;
+//     top: -5%;
+//     left: 0;
+//     width: 100%;
+//     height: 100%;
+//     background-repeat: no-repeat;
+//     background-size: cover;
+
+//   }
+// }
+
+.confity-anim {
+  animation: floating 2.5s ease-in-out infinite alternate-reverse both;
+}
+.accent-hover:hover {
+  background-color: #077bd3 !important;
+}
+.form-wrapper .input {
+  padding-left: 0.5rem;
+  svg {
+    width: 20px;
+    height: 20px;
+  }
+}
+@keyframes floating {
+  0% {
+    -webkit-transform: translateY(0);
+    transform: translateY(0);
+  }
+  100% {
+    -webkit-transform: translateY(-10px);
+    transform: translateY(-10px);
+  }
+}
+
+.card .btn {
+  border-color: transparent;
+  border-color: #077bd3;
+  background-color: #077bd3;
+}
 
 @media (max-width: 1024px) {
   .fast-play {
@@ -316,7 +364,7 @@
     }
   }
   .quiz-list {
-    min-height: 100vh;
+    min-height: 95vh;
     .quiz-list-wrapper {
       gap: 20px;
       width: 96% !important;
@@ -325,14 +373,16 @@
       height: 200px !important;
     }
     .card-body {
-      padding: 0px 20px 30px;
-
+      padding: 10px 20px 15px;
       h2 {
         font-size: 22px;
       }
       p {
         font-size: 14px;
       }
+    }
+    .card-title {
+      padding-top: 0;
     }
   }
   .quiz-detail {
@@ -395,7 +445,7 @@
       font-size: 24px;
       padding-bottom: 20px;
       line-height: 30px;
-      text-shadow: 0 0 20px white, 0 0 40px white;
+      text-shadow: 0 0 20px #7702ff, 0 0 40px #1b2642, 0 0 80px #0a0e2f;
     }
   }
   .footer {

@@ -1,0 +1,19 @@
+<div class="text-center overflow-hidden">
+  <h5 class="text-2xl pt-10 pb-5 relative z-10 confity-img">
+    🎉 Поздравляем 🎉
+    <br />
+    <span class="text-xl">🥳 Вы прошли викторину успешно 🥳</span>
+  </h5>
+  <img
+    class="absolute top-[17%] left-0 confity-anim"
+    src="https://www.pngall.com/wp-content/uploads/2016/07/Confetti-PNG-HD.png"
+    alt=""
+  />
+  <p *ngIf="quiz?.finalPage">{{ quiz?.finalPage }}</p>
+  <div class="btn-grup flex flex-col gap-3 max-w-[400px] mx-auto relative z-10">
+    <button (click)="getResults.emit()" class="btn btn-success">
+      Получить результат
+    </button>
+    <button (click)="reset.emit()" class="btn btn-ghost">Начать заново</button>
+  </div>
+</div>

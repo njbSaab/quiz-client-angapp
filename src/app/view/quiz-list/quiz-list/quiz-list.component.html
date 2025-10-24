@@ -11,7 +11,11 @@
           [routerLink]="['/quiz', quiz.id]"
         >
           <figure>
-            <img *ngIf="quiz.img" [src]="quiz.img" alt="{{ quiz.title }}" />
+            <img
+              *ngIf="quiz.previewImage"
+              [src]="quiz.previewImage"
+              alt="{{ quiz.title }}"
+            />
           </figure>
           <div class="card-body">
             <div class="card-body-header flex justify-between items-center">

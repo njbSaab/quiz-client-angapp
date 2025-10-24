@@ -27,6 +27,7 @@ import { QuizService } from '../../../core/services/quiz.service';
 })
 export class QuizSingleComponent implements OnInit {
   quiz: Quiz | null = null;
+  isQuizCompleted: boolean = false;
 
   constructor(
     private route: ActivatedRoute,
@@ -37,6 +38,7 @@ export class QuizSingleComponent implements OnInit {
     const id = this.route.snapshot.paramMap.get('id');
     if (id) {
       this.loadQuiz(+id);
+      this.checkQuizCompletion(+id);
     }
   }
 
@@ -47,8 +49,12 @@ export class QuizSingleComponent implements OnInit {
       },
       error: (error) => {
         console.error('Ошибка загрузки квиза:', error);
-      }
+      },
     });
+  }
+
+  checkQuizCompletion(quizId: number): void {
+    this.isQuizCompleted = localStorage.getItem(`quiz_${quizId}_completed`) === 'true';
   }
 
   isArrow: boolean = false;

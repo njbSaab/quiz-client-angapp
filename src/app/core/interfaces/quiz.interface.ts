@@ -17,6 +17,7 @@ export interface Quiz {
   id: number;
   title: string;
   description?: string;
+  previewImage?: string;
   firstPage?: string;
   finalPage?: string;
   isActive: boolean;

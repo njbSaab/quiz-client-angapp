@@ -14,30 +14,39 @@ export class TimerService {
 
   // Запуск таймера
   startTimer(): void {
-    this.resetTimer();
+    if (this.timerSubscription) {
+      this.timerSubscription.unsubscribe(); // Останавливаем существующий таймер
+    }
 
     const progressInterval = 100; // Интервал обновления в миллисекундах
     const totalSteps = this.totalTime * (1000 / progressInterval);
 
     let elapsedSteps = 0;
 
+    this.currentTime$.next(this.totalTime);
+    this.progress$.next(0);
+
     this.timerSubscription = interval(progressInterval).subscribe(() => {
       elapsedSteps++;
       const remainingTime = this.totalTime - Math.floor((elapsedSteps * progressInterval) / 1000);
       const progress = (elapsedSteps / totalSteps) * 100;
 
-      if (remainingTime >= 0) {
-        this.currentTime$.next(remainingTime);
-        this.progress$.next(progress);
-      } else {
-        this.stopTimer(); // Остановить таймер, если он завершился
+      this.currentTime$.next(remainingTime);
+      this.progress$.next(progress);
+
+      if (remainingTime <= 0) {
+        this.timerSubscription?.unsubscribe(); // Просто останавливаем подписку
+        this.timerSubscription = null;
       }
     });
   }
 
   // Сброс таймера
   resetTimer(): void {
-    this.stopTimer();
+    if (this.timerSubscription) {
+      this.timerSubscription.unsubscribe();
+      this.timerSubscription = null;
+    }
     this.currentTime$.next(this.totalTime);
     this.progress$.next(0);
   }
@@ -48,8 +57,5 @@ export class TimerService {
       this.timerSubscription.unsubscribe();
       this.timerSubscription = null;
     }
-
-    this.currentTime$.next(this.totalTime);
-    this.progress$.next(0);
   }
 }
