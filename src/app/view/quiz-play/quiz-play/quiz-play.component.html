@@ -1,4 +1,8 @@
-<div class="quiz-play" *ngIf="quiz; else notFound" appChangeBackground>
+<div
+  class="quiz-play mx-w-1024"
+  *ngIf="quiz; else notFound"
+  appChangeBackground
+>
   <div class="container">
     <h1 class="text-center text-3xl opacity-0">{{ quiz.title }}</h1>
 
@@ -27,12 +31,18 @@
 
       <div class="quistion-text w-full">
         <img
-          class="w-full h-full object-cover"
+          class="w-full h-full"
           *ngIf="questions[currentQuestionIndex].image"
           [src]="questions[currentQuestionIndex].image"
           alt="Question image"
         />
-        <h3 class="text-2xl my-4 px-2">
+        <h3
+          class="text-2xl my-4 px-2"
+          [ngClass]="{
+            'text-center': questions[currentQuestionIndex].text.length < 50,
+            'text-left': questions[currentQuestionIndex].text.length >= 50
+          }"
+        >
           {{ questions[currentQuestionIndex].text }}
         </h3>
       </div>
@@ -65,7 +75,7 @@
 
 <ng-template #notFound>
   <div class="loading-container text-center h-screen">
-    <span class="loading loading-ring text-accent loading-lg"></span>
+    <span class="loading loading-ring text-blue loading-lg"></span>
     <span class="loading loading-ring text-regular loading-md"></span>
   </div>
 </ng-template>

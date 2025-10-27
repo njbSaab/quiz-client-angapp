@@ -51,8 +51,15 @@
     var(--vivid-pink) 100%
   );
 }
-
+.mx-w-1024 {
+  max-width: 1024px;
+  margin: 0 auto;
+}
 .router-link-active {
+  background-color: #077bd3 !important;
+}
+.text-blue {
+  color: #0989ec !important;
   background-color: #077bd3 !important;
 }
 .result-wrapper .btn-primary {

@@ -34,7 +34,6 @@ export class QuizResultComponent implements OnInit {
       code: [''],
     });
 
-    // Загружаем данные из localStorage для текущего quizId
     const correctAnswersCount = localStorage.getItem(`quiz_${this.quizId}_correctAnswersCount`);
     const currentQuestionIndex = localStorage.getItem(`quiz_${this.quizId}_currentQuestionIndex`);
     const totalPoints = localStorage.getItem(`quiz_${this.quizId}_totalPoints`);
@@ -44,8 +43,6 @@ export class QuizResultComponent implements OnInit {
     this.currentQuestionIndex = currentQuestionIndex ? +currentQuestionIndex : 0;
     this.totalPoints = totalPoints ? +totalPoints : 0;
     this.answers = answers ? JSON.parse(answers) : [];
-
-    this.saveQuizResult();
   }
 
   submitFinalForm(): void {
@@ -53,35 +50,6 @@ export class QuizResultComponent implements OnInit {
       console.log('Верификация кода:', this.myForm.get('code')?.value);
       this.router.navigate(['/quizzes']);
     }
-  }
-
-  private saveQuizResult(): void {
-    const resultData: UserResult = {
-      quizId: this.quizId,
-      sessionId: this.userService.getSessionId(),
-      userId: this.userService.getUserId() || null,
-      score: this.totalPoints,
-      answers: this.answers.filter((answer) => answer.answerId !== null) as {
-        questionId: number;
-        answerId: number;
-      }[],
-    };
-
-    this.userService.addUserResult(resultData).subscribe({
-      next: (response) => {
-        console.log('Результаты сохранены:', response);
-        // Очищаем данные после сохранения результатов
-        localStorage.removeItem(`quiz_${this.quizId}_id`);
-        localStorage.removeItem(`quiz_${this.quizId}_currentQuestionIndex`);
-        localStorage.removeItem(`quiz_${this.quizId}_correctAnswersCount`);
-        localStorage.removeItem(`quiz_${this.quizId}_totalPoints`);
-        localStorage.removeItem(`quiz_${this.quizId}_answers`);
-        localStorage.removeItem(`quiz_${this.quizId}_completed`);
-      },
-      error: (error) => {
-        console.error('Ошибка сохранения результатов:', error);
-      },
-    });
   }
 
   sendForm(): void {

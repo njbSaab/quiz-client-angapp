@@ -1,4 +1,4 @@
-<div class="quiz-list h-space">
+<div class="quiz-list h-space mx-w-1024">
   <ng-container *ngIf="quizzes?.length; else loading">
     <div class="container bg-gradient-primary-0 rounded-box py-5">
       <div
@@ -57,8 +57,8 @@
   </ng-container>
 
   <ng-template #loading>
-    <div class="loading-container text-center">
-      <span class="loading loading-ring text-accent loading-lg"></span>
+    <div class="loading-container text-center h-screen">
+      <span class="loading loading-ring text-accent loading-xl"></span>
       <span class="loading loading-ring text-regular loading-md"></span>
     </div>
   </ng-template>

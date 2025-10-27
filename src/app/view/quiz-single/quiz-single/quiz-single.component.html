@@ -1,4 +1,4 @@
-<div *ngIf="quiz; else notFound" class="quiz-detail h-space">
+<div *ngIf="quiz; else notFound" class="quiz-detail h-space mx-w-1024">
   <div class="card bg-gradient-base-180 pt-4">
     <div class="img-wrapper" [@blurIn]>
       <figure
@@ -115,7 +115,8 @@
 </div>
 
 <ng-template #notFound>
-  <div class="text-center pt-[50px]">
-    <p class="text-2xl text-red-600">Упс, квиз не найден.</p>
+  <div class="loading-container text-center h-screen">
+    <span class="loading loading-ring text-blue loading-xl"></span>
+    <span class="loading loading-ring text-regular loading-md"></span>
   </div>
 </ng-template>

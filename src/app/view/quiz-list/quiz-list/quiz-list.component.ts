@@ -24,6 +24,7 @@ import { UserSessionData } from '../../../core/interfaces/user.interface';
 })
 export class QuizListComponent implements OnInit {
   quizzes: Quiz[] = [];
+  private hasSessionSaved: boolean = false; // Флаг для предотвращения дублирования
 
   constructor(
     private quizService: QuizService,
@@ -33,7 +34,10 @@ export class QuizListComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadQuizzes();
-    this.saveUserSession();
+    if (!this.hasSessionSaved) {
+      this.saveUserSession();
+      this.hasSessionSaved = true;
+    }
   }
 
   loadQuizzes(): void {
@@ -95,7 +99,7 @@ export class QuizListComponent implements OnInit {
 
   private sendSessionData(browserInfo: any): void {
     const sessionData: UserSessionData = {
-      quizId: 0,
+      quizId: 0, // Используем 0 для списка квизов, но лучше уточнить логику
       sessionId: this.userService.getSessionId(),
       userId: this.userService.getUserId() || null,
       currentQuestionIndex: 0,
@@ -104,20 +108,7 @@ export class QuizListComponent implements OnInit {
       answers: [],
       browserInfo,
     };
-  
-    this.userService.saveUserSession(sessionData).subscribe({
-      next: (response) => {
-        console.log('Сессия сохранена:', response);
-        if (response.session?.sessionId) {
-          localStorage.setItem('sessionId', response.session.sessionId);
-        }
-        if (response.userId) {
-          localStorage.setItem('userId', response.userId);
-        }
-      },
-      error: (error) => {
-        console.error('Ошибка сохранения сессии:', error);
-      },
-    });
+
+    this.userService.saveUserSession(sessionData);
   }
 }

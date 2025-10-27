@@ -12,7 +12,7 @@
   }
   .quistion-text img {
     max-height: 50dvh;
-    object-fit: contain;
+    object-fit: cover;
   }
   .timer-box {
     position: absolute;
@@ -28,5 +28,11 @@
   .quiz-play-answers-item {
     border-radius: 20px;
     padding: 20px 5px;
+  }
+}
+
+@media screen and (max-width: 1024px) {
+  .quistion-text img {
+    object-fit: fill;
   }
 }

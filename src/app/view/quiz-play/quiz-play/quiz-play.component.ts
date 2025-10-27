@@ -56,6 +56,8 @@ export class QuizPlayComponent implements OnInit {
   isAnswerVisible: boolean = true;
   answers: { questionId: number; answerId: number | null }[] = [];
   isQuizFinished: boolean = false;
+  private isSessionSaved: boolean = false; // Флаг для сессии
+  private isResultSaved: boolean = false; // Флаг для результатов
 
   constructor(
     private quizService: QuizService,
@@ -81,16 +83,20 @@ export class QuizPlayComponent implements OnInit {
             return;
           }
 
-          // Загружаем данные из localStorage для конкретного quizId
           this.loadQuizSession(quizId);
 
           if (!this.isQuizFinished) {
             this.timerService.startTimer();
+            if (!this.isSessionSaved) {
+              this.saveUserSession(quizId); // Сохраняем сессию только при старте
+              this.isSessionSaved = true;
+            }
           } else {
             this.timerService.stopTimer();
-            this.saveResults();
+            if (!this.isResultSaved) {
+              this.saveResults();
+            }
           }
-          this.saveUserSession(quizId);
         } else {
           console.error('Квиз не найден!');
           this.router.navigate(['/quizzes']);
@@ -121,7 +127,6 @@ export class QuizPlayComponent implements OnInit {
     const storedPoints = localStorage.getItem(`quiz_${quizId}_totalPoints`);
     const storedAnswers = localStorage.getItem(`quiz_${quizId}_answers`);
 
-    // Проверяем, что данные относятся к текущему квизу
     if (storedQuizId === quizId.toString()) {
       this.currentQuestionIndex = storedIndex ? +storedIndex : 0;
       this.correctAnswersCount = storedCorrectCount ? +storedCorrectCount : 0;
@@ -129,7 +134,6 @@ export class QuizPlayComponent implements OnInit {
       this.answers = storedAnswers ? JSON.parse(storedAnswers) : [];
       this.isQuizFinished = this.currentQuestionIndex >= this.questions.length;
     } else {
-      // Если данные относятся к другому квизу, сбрасываем сессию
       this.resetProgress(quizId);
     }
   }
@@ -147,14 +151,13 @@ export class QuizPlayComponent implements OnInit {
       answerId: answer.id,
     });
 
-    // Сохраняем данные с привязкой к quizId
     localStorage.setItem(`quiz_${this.quiz!.id}_id`, this.quiz!.id.toString());
     localStorage.setItem(`quiz_${this.quiz!.id}_correctAnswersCount`, this.correctAnswersCount.toString());
     localStorage.setItem(`quiz_${this.quiz!.id}_totalPoints`, this.totalPoints.toString());
     localStorage.setItem(`quiz_${this.quiz!.id}_answers`, JSON.stringify(this.answers));
 
     this.timerService.stopTimer();
-    this.saveUserSession(this.quiz!.id);
+    this.saveUserSession(this.quiz!.id); // Сохраняем сессию после ответа
 
     this.isAnswerVisible = false;
 
@@ -173,7 +176,7 @@ export class QuizPlayComponent implements OnInit {
     });
 
     localStorage.setItem(`quiz_${this.quiz!.id}_answers`, JSON.stringify(this.answers));
-    this.saveUserSession(this.quiz!.id);
+    this.saveUserSession(this.quiz!.id); // Сохраняем сессию при истечении времени
 
     this.timerService.stopTimer();
     this.isAnswerVisible = false;
@@ -194,10 +197,11 @@ export class QuizPlayComponent implements OnInit {
       this.progress = 100;
       localStorage.setItem(`quiz_${this.quiz!.id}_answers`, JSON.stringify(this.answers));
       localStorage.setItem(`quiz_${this.quiz!.id}_completed`, 'true');
-      this.saveResults();
+      if (!this.isResultSaved) {
+        this.saveResults();
+      }
     } else {
       this.timerService.startTimer();
-      this.saveUserSession(this.quiz!.id);
     }
   }
 
@@ -208,6 +212,8 @@ export class QuizPlayComponent implements OnInit {
     this.totalPoints = 0;
     this.answers = [];
     this.isQuizFinished = false;
+    this.isSessionSaved = false;
+    this.isResultSaved = false;
     localStorage.setItem(`quiz_${id}_id`, id.toString());
     localStorage.removeItem(`quiz_${id}_currentQuestionIndex`);
     localStorage.removeItem(`quiz_${id}_correctAnswersCount`);
@@ -277,21 +283,11 @@ export class QuizPlayComponent implements OnInit {
       browserInfo,
     };
 
-    this.userService.saveUserSession(sessionData).subscribe({
-      next: (response) => {
-        console.log('Сессия сохранена:', response);
-        if (response.userId) {
-          localStorage.setItem('userId', response.userId);
-        }
-      },
-      error: (error) => {
-        console.error('Ошибка сохранения сессии:', error);
-      },
-    });
+    this.userService.saveUserSession(sessionData);
   }
 
   private saveResults(): void {
-    if (this.quiz) {
+    if (this.quiz && !this.isResultSaved) {
       const result: UserResult = {
         quizId: this.quiz.id,
         sessionId: this.userService.getSessionId(),
@@ -303,10 +299,15 @@ export class QuizPlayComponent implements OnInit {
         }[],
       };
 
-      this.userService.addUserResult(result).subscribe({
-        next: () => console.log('Результаты сохранены на сервере'),
-        error: (error) => console.error('Ошибка сохранения результатов:', error),
-      });
+      this.userService.addUserResult(result);
+      this.isResultSaved = true;
+      // Очистка localStorage после сохранения результатов
+      localStorage.removeItem(`quiz_${this.quiz.id}_id`);
+      localStorage.removeItem(`quiz_${this.quiz.id}_currentQuestionIndex`);
+      localStorage.removeItem(`quiz_${this.quiz.id}_correctAnswersCount`);
+      localStorage.removeItem(`quiz_${this.quiz.id}_totalPoints`);
+      localStorage.removeItem(`quiz_${this.quiz.id}_answers`);
+      localStorage.removeItem(`quiz_${this.quiz.id}_completed`);
     }
   }
 }
