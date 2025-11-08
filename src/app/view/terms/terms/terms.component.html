@@ -1,0 +1,159 @@
+<section class="h-space mb-8">
+  <div class="absolute inset-0 -z-10">
+    <div
+      class="absolute -top-40 left-1/2 -translate-x-1/2 h-[32rem] w-full lg:w-[32rem] rounded-full blur-3xl opacity-20"
+      style="
+        background: radial-gradient(closest-side, #a78bfa, transparent 70%);
+      "
+    ></div>
+    <div
+      class="absolute top-40 right-10 h-64 w-64 rounded-full blur-3xl opacity-25"
+      style="
+        background: radial-gradient(closest-side, #22d3ee, transparent 70%);
+      "
+    ></div>
+  </div>
+  <div class="container max-w-[850px] px-6 py-10 mx-auto">
+    <h2
+      class="text-2xl capitalize lg:text-3xl font-semibold tracking-tight cursor-pointer text-center"
+    >
+      <span
+        class="bg-gradient-to-r from-fuchsia-400 via-cyan-300 to-violet-400 bg-clip-text text-transparent"
+      >
+        Trung tâm đồng ý
+      </span>
+    </h2>
+
+    <p
+      class="text-md lg:text-xl text-center text-white opacity-70 w-[80%] mx-auto"
+    >
+      Tại đây bạn kiểm soát cookie và mục đích xử lý dữ liệu không thiết yếu.
+      Những mục Cần thiết luôn bật để website hoạt động an toàn.
+    </p>
+    <div class="mt-8 flex flex-col gap-4">
+      <div class="collapse" #collapse>
+        <input
+          type="radio"
+          name="my-accordion-1"
+          checked="checked"
+          value="cayn"
+          (change)="onCollapseChange($event)"
+        />
+        <div class="collapse-title font-semibold mx-4 text-xl dark:text-white">
+          Trạng thái hiện tại:
+        </div>
+        <div class="collapse-content flex">
+          <span class="border border-cyan-500 ml-4"></span>
+          <p class="max-w-3xl px-4 text-gray-500 dark:text-gray-300">
+            Cần thiết (Necessary): Luôn bật <br />
+            Tuỳ chọn (Preferences): [Bật/Tắt] <br />
+            Phân tích (Analytics): [Bật/Tắt] <br />
+            Tiếp thị (Marketing): [Bật/Tắt] <br />
+          </p>
+        </div>
+      </div>
+
+      <div class="collapse cursor-pointer" #collapse>
+        <input
+          type="radio"
+          name="my-accordion-1"
+          value="center"
+          (change)="onCollapseChange($event)"
+        />
+        <div class="collapse-title font-semibold mx-4 text-xl dark:text-white">
+          Cần thiết:
+        </div>
+        <div class="collapse-content flex">
+          <span class="border border-blue-500 ml-4"></span>
+          <p class="max-w-3xl px-4 text-gray-500 dark:text-gray-300">
+            điều hướng, bảo mật, cân bằng tải, ghi nhớ ngôn ngữ. Không thể tắt.
+            Tuỳ chọn (Preferences): ghi nhớ lựa chọn của bạn (ví dụ ngôn ngữ,
+            hiển thị).
+          </p>
+        </div>
+      </div>
+
+      <div class="collapse cursor-pointer" #collapse>
+        <input
+          type="radio"
+          name="my-accordion-1"
+          value="fuchsia"
+          (change)="onCollapseChange($event)"
+        />
+        <div class="collapse-title font-semibold mx-4 text-xl dark:text-white">
+          Phân tích (Analytics):
+        </div>
+        <div class="collapse-content flex">
+          <span class="border border-fuchsia-500 ml-4"></span>
+          <p class="max-w-3xl px-4 text-gray-500 dark:text-gray-300">
+            đo lường hành vi tổng hợp, cải thiện nội dung. Chúng tôi không tạo
+            hồ sơ cá nhân hoá nếu bạn không cho phép.
+          </p>
+        </div>
+      </div>
+
+      <div class="collapse cursor-pointer" #collapse>
+        <input
+          type="radio"
+          name="my-accordion-1"
+          value="cayn"
+          (change)="onCollapseChange($event)"
+        />
+        <div class="collapse-title font-semibold mx-4 text-xl dark:text-white">
+          Tiếp thị (Marketing):
+        </div>
+        <div class="collapse-content flex">
+          <span class="border border-cyan-500 ml-4"></span>
+          <p class="max-w-3xl px-4 text-gray-500 dark:text-gray-300">
+            đo lường chiến dịch, gợi ý nội dung đối tác 20+ ở mức tổng quát;
+            không theo dõi chéo nếu bạn không đồng ý.
+          </p>
+        </div>
+      </div>
+
+      <div class="collapse cursor-pointer" #collapse>
+        <input
+          type="radio"
+          name="my-accordion-1"
+          value="center"
+          (change)="onCollapseChange($event)"
+        />
+        <div class="collapse-title font-semibold mx-4 text-xl dark:text-white">
+          Lựa chọn của bạn:
+        </div>
+        <div class="collapse-content flex">
+          <span class="border border-blue-500 ml-4"></span>
+          <p class="max-w-3xl px-4 text-gray-500 dark:text-gray-300">
+            Chấp nhận tất cả / Chỉ cho phép cần thiết / Lưu tuỳ chọn. Bạn có thể
+            thay đổi bất cứ lúc nào tại trang này. Khi bạn chọn “Chỉ cần thiết”,
+            cookie không thiết yếu sẽ bị tắt/bị xoá khi có thể.
+          </p>
+        </div>
+      </div>
+
+      <div class="collapse cursor-pointer" #collapse>
+        <input
+          type="radio"
+          name="my-accordion-1"
+          value="fuchsia"
+          (change)="onCollapseChange($event)"
+        />
+        <div class="collapse-title font-semibold mx-4 text-xl dark:text-white">
+          Minh bạch
+        </div>
+        <div class="collapse-content flex">
+          <span class="border border-fuchsia-500 ml-4"></span>
+          <p class="max-w-3xl px-4 text-gray-500 dark:text-gray-300">
+            Danh sách nhà cung cấp (ví dụ): lưu trữ/CDN, phân tích, email. Chi
+            tiết có thể cập nhật theo thời gian.
+            <br />
+            <br />
+
+            Mọi câu hỏi:
+            <a class="link-info" href="mailto:{{ email }}"> {{ email }} </a>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

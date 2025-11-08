@@ -1,3 +1,6 @@
+.quiz-detail.h-space {
+  padding-top: 118px;
+}
 .card {
   .btn-single {
     border-radius: 0 0;
@@ -7,8 +10,7 @@
     transform: none;
   }
   .filled {
-    background-image: var(--electric-violet);
-    background: var(--electric-violet);
+    background: #67e8f9 !important;
     // --electric-violet: oklch(53.18% 0.28 296.97);
     // --french-violet: oklch(47.66% 0.246 305.88);
   }
@@ -26,7 +28,10 @@
   }
 
   .img-wrapper {
-    height: 40dvh;
+    height: 333px;
+  }
+  .bg-red-v {
+    background: #67e8f93b;
   }
 
   .img-stack-wrapper {
@@ -38,6 +43,7 @@
       transition: all 0.5s ease;
       top: 0;
       aspect-ratio: 16 / 9;
+      object-fit: cover;
     }
 
     img:nth-child(1) {
@@ -68,7 +74,7 @@
     &:hover img {
       transform: rotate(0);
       opacity: 1;
-      box-shadow: 0 0 3rem #077bd36d;
+      // box-shadow: 0 0 3rem #077bd36d;
       scale: 1.1;
     }
   }
@@ -118,4 +124,10 @@
   //     opacity: 1;
   //   }
   // }
+}
+
+@media (max-width: 768px) {
+  .h-space {
+    padding-top: 110px;
+  }
 }

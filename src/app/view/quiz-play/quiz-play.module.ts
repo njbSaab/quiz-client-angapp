@@ -14,7 +14,7 @@ const routes: Routes = [
   imports: [
     CommonModule,
     RouterModule.forChild(routes),
-    SharedModule, // Если есть SharedModule
+    SharedModule, 
     RouterLink,
   ],
   exports: [RouterModule, QuizPlayComponent],

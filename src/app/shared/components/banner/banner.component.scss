@@ -1,0 +1,37 @@
+.banner {
+  position: relative;
+  &::after {
+    background: linear-gradient(0deg, rgba(0, 0, 0, 0.48), rgba(0, 0, 0, 0.48)),
+      linear-gradient(180deg, rgba(1, 23, 44, 0) 57.96%, #01172c 96.67%);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    content: "";
+  }
+  &::before {
+    position: absolute;
+    background-image: url("https://i.ibb.co/KxqLGhGc/bg-top.jpg");
+    background-size: cover;
+    background-position: center center;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    content: "";
+  }
+  h1 {
+    text-wrap: balance;
+    text-wrap: nowrap;
+  }
+}
+
+@media (max-width: 1024px) {
+  .banner.h-space {
+    padding-top: 130px;
+    h1 {
+      text-wrap: balance;
+    }
+  }
+}

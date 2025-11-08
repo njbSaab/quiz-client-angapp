@@ -1,92 +1,430 @@
 <header class="header">
+  <!-- ОСНОВНАЯ НАВИГАЦИЯ -->
   <div class="navbar glass">
-    <!-- <div class="navbar-wrapper-menu"></div> -->
-    <div class="navbar-start">
-      <div class="nav-dropdown glass relative">
-        <div
-          tabindex="0"
-          role="button"
-          class="btn btn-ghost btn-circle accent-hover"
-        >
-          <label class="swap swap-rotate">
-            <input type="checkbox" (change)="onToggleChange($event)" />
-
-            <!-- hamburger icon -->
-            <svg
-              class="swap-off fill-current"
-              xmlns="http://www.w3.org/2000/svg"
-              width="32"
-              height="32"
-              viewBox="0 0 512 512"
-            >
-              <path
-                d="M64,384H448V341.33H64Zm0-106.67H448V234.67H64ZM64,128v42.67H448V128Z"
-              />
-            </svg>
-
-            <!-- close icon -->
-            <svg
-              class="swap-on fill-current"
-              xmlns="http://www.w3.org/2000/svg"
-              width="32"
-              height="32"
-              viewBox="0 0 512 512"
-            >
-              <polygon
-                points="400 145.49 366.51 112 256 222.51 145.49 112 112 145.49 222.51 256 112 366.51 145.49 400 256 289.49 366.51 400 400 366.51 289.49 256 400 145.49"
-              />
-            </svg>
-          </label>
-        </div>
-        <ul tabindex="0" class="nav-menu flex gap-4 bg-accent">
-          <li>
-            <a
-              class="btn btn-ghost accent-hover"
-              routerLinkActive="router-link-active"
-              [routerLink]="['/']"
-              [routerLinkActiveOptions]="{ exact: true }"
-              >Home</a
-            >
-          </li>
-          <li>
-            <a
-              class="btn btn-ghost accent-hover"
-              routerLinkActive="router-link-active"
-              [routerLink]="['/about']"
-              [routerLinkActiveOptions]="{ exact: true }"
-              >About</a
-            >
-          </li>
-          <li>
-            <a
-              class="btn btn-ghost accent-hover"
-              [routerLink]="['/contacts']"
-              routerLinkActive="router-link-active"
-              [routerLinkActiveOptions]="{ exact: true }"
-              >Contacts</a
-            >
-          </li>
-        </ul>
-      </div>
+    <!-- ЛОГО СЛЕВА -->
+    <div class="navbar-start w-fit cursor-pointer" [routerLink]="['/']">
+      <img
+        class="w-[50px]"
+        src="https://i.ibb.co/Qvd3RYXX/5.png"
+        alt="VoteVibe"
+      />
     </div>
-    <div class="navbar-center">
-      <a
-        class="logo-link btn-neutral btn-circle cursor-pointer"
+
+    <!-- НАЗВАНИЕ ПО ЦЕНТРУ -->
+    <div class="navbar-center flex-1 justify-center">
+      <span
+        class="text-lg font-semibold tracking-tight cursor-pointer"
         [routerLink]="['/']"
       >
-        <img class="logo" src="https://i.ibb.co/5X5Jxv13/quiz2.png" alt="" />
-      </a>
+        <span
+          class="bg-gradient-to-r from-fuchsia-400 via-cyan-300 to-violet-400 bg-clip-text text-transparent"
+        >
+          VoteVibe
+        </span>
+      </span>
     </div>
-    <div class="navbar-end">
-      <a class="btn btn-ghost btn-circle accent-hover" [routerLink]="['/']">
-        <div class="indicator">
-          <img
-            src="https://icongr.am/feather/play.svg?size=36&color=dbdbdb"
-            alt=""
-            class="ml-2"
+
+    <!-- КНОПКА МЕНЮ (ЕДИНАЯ!) -->
+    <div class="navbar-end w-fit">
+      <label
+        for="menu-toggle"
+        class="btn btn-circle bg-gradient-to-r from-fuchsia-500 to-cyan-400 accent-hover swap swap-rotate"
+      >
+        <!-- Гамбургер -->
+        <svg
+          class="swap-off fill-current w-6 h-6"
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 512 512"
+        >
+          <path
+            d="M64,384H448V341.33H64Zm0-106.67H448V234.67H64ZM64,128v42.67H448V128Z"
           />
-        </div>
-      </a>
+        </svg>
+        <!-- Крестик -->
+        <svg
+          class="swap-on fill-current w-6 h-6"
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 512 512"
+        >
+          <polygon
+            points="400 145.49 366.51 112 256 222.51 145.49 112 112 145.49 222.51 256 112 366.51 145.49 400 256 289.49 366.51 400 400 366.51 289.49 256 400 145.49"
+          />
+        </svg>
+      </label>
+    </div>
+  </div>
+
+  <!-- СКРЫТЫЙ CHECKBOX -->
+  <input
+    id="menu-toggle"
+    type="checkbox"
+    class="hidden"
+    [checked]="isMenuOpen"
+    (change)="onToggle($event)"
+  />
+
+  <!-- МОБИЛЬНОЕ МЕНЮ (drawer) -->
+  <div
+    class="drawer drawer-end md:hidden fixed z-[1111]"
+    [class.drawer-open]="isMenuOpen"
+  >
+    <input
+      id="mobile-drawer"
+      type="checkbox"
+      class="drawer-toggle"
+      (click)="closeMenu()"
+    />
+    <div class="drawer-side z-50">
+      <label
+        for="menu-toggle"
+        class="drawer-overlay"
+        (click)="closeMenu()"
+      ></label>
+      <ul class="menu bg-base-200 min-h-full w-80 bg-black/80">
+        <li
+          class="flex flex-row justify-center items-center py-4"
+          (click)="closeMenu()"
+        >
+          <img
+            class="w-[50px] p-0"
+            src="https://i.ibb.co/Qvd3RYXX/5.png"
+            alt=""
+          />
+          <span
+            [routerLink]="['/']"
+            class="text-3xl font-semibold tracking-tight cursor-pointer"
+          >
+            <span
+              class="bg-gradient-to-r from-fuchsia-400 via-cyan-300 to-violet-400 bg-clip-text text-transparent"
+            >
+              VoteVibe
+            </span>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="35"
+              height="35"
+              viewBox="0 0 24 24"
+              class="absolute right-0 cursor-pointer top-0 p-0"
+            >
+              <g
+                fill="none"
+                stroke="#fff"
+                stroke-dasharray="16"
+                stroke-dashoffset="16"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+              >
+                <path d="M7 7l10 10">
+                  <animate
+                    fill="freeze"
+                    attributeName="stroke-dashoffset"
+                    dur="0.4s"
+                    values="16;0"
+                  />
+                </path>
+                <path d="M17 7l-10 10">
+                  <animate
+                    fill="freeze"
+                    attributeName="stroke-dashoffset"
+                    begin="0.4s"
+                    dur="0.4s"
+                    values="16;0"
+                  />
+                </path>
+              </g>
+            </svg>
+          </span>
+        </li>
+        <li>
+          <a
+            [routerLink]="['/']"
+            (click)="closeMenu()"
+            class="btn btn-ghost accent-hover"
+            >Câu đố<svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+            >
+              <path
+                fill="#fff"
+                d="M12.6 12L8 7.4L9.4 6l6 6l-6 6L8 16.6z"
+              /></svg
+          ></a>
+        </li>
+        <li>
+          <a
+            [routerLink]="['/terms']"
+            (click)="closeMenu()"
+            routerLinkActive="router-link-active"
+            class="btn btn-ghost accent-hover rounded-xl"
+            >Trung tâm đồng ý<svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+            >
+              <path
+                fill="#fff"
+                d="M12.6 12L8 7.4L9.4 6l6 6l-6 6L8 16.6z"
+              /></svg
+          ></a>
+        </li>
+        <li>
+          <a
+            [routerLink]="['/about']"
+            (click)="closeMenu()"
+            routerLinkActive="router-link-active"
+            class="btn btn-ghost accent-hover rounded-xl"
+          >
+            Về chúng tôi
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+            >
+              <path
+                fill="#fff"
+                d="M12.6 12L8 7.4L9.4 6l6 6l-6 6L8 16.6z"
+              /></svg
+          ></a>
+        </li>
+        <li>
+          <a
+            [routerLink]="['/contacts']"
+            (click)="closeMenu()"
+            routerLinkActive="router-link-active"
+            class="btn btn-ghost accent-hover rounded-xl"
+          >
+            Liên hệ<svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+            >
+              <path
+                fill="#fff"
+                d="M12.6 12L8 7.4L9.4 6l6 6l-6 6L8 16.6z"
+              /></svg
+          ></a>
+        </li>
+        <li>
+          <a
+            [routerLink]="['/faq']"
+            (click)="closeMenu()"
+            routerLinkActive="router-link-active"
+            class="btn btn-ghost accent-hover rounded-xl"
+            >FAQ<svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+            >
+              <path
+                fill="#fff"
+                d="M12.6 12L8 7.4L9.4 6l6 6l-6 6L8 16.6z"
+              /></svg
+          ></a>
+        </li>
+        <li>
+          <a
+            [routerLink]="['/policy']"
+            (click)="closeMenu()"
+            routerLinkActive="router-link-active"
+            class="btn btn-ghost accent-hover rounded-xl"
+            >Chính sách bảo mật<svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+            >
+              <path
+                fill="#fff"
+                d="M12.6 12L8 7.4L9.4 6l6 6l-6 6L8 16.6z"
+              /></svg
+          ></a>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- ДЕСКТОПНОЕ МЕНЮ -->
+  <div
+    class="hidden md:block fixed top-0 right-0 h-full w-80 bg-base-200 z-50 transition-transform duration-300 drawer-desktop"
+    [class.translate-x-0]="isMenuOpen"
+    [class.translate-x-full]="!isMenuOpen"
+  >
+    <div
+      class="absolute inset-0 bg-black/50 drawer-overlay"
+      (click)="closeMenu()"
+      *ngIf="isMenuOpen"
+    ></div>
+    <div class="relative h-full p-0">
+      <ul class="menu">
+        <li
+          class="flex flex-row justify-center items-center py-4"
+          (click)="closeMenu()"
+        >
+          <img class="w-[70px]" src="https://i.ibb.co/Qvd3RYXX/5.png" alt="" />
+          <span
+            [routerLink]="['/']"
+            class="text-3xl font-semibold tracking-tight cursor-pointer"
+          >
+            <span
+              class="bg-gradient-to-r from-fuchsia-400 via-cyan-300 to-violet-400 bg-clip-text text-transparent"
+            >
+              VoteVibe
+            </span>
+          </span>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="48"
+            height="48"
+            viewBox="0 0 24 24"
+            class="absolute right-4 cursor-pointer p-0"
+          >
+            <g
+              fill="none"
+              stroke="#fff"
+              stroke-dasharray="16"
+              stroke-dashoffset="16"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+            >
+              <path d="M7 7l10 10">
+                <animate
+                  fill="freeze"
+                  attributeName="stroke-dashoffset"
+                  dur="0.4s"
+                  values="16;0"
+                />
+              </path>
+              <path d="M17 7l-10 10">
+                <animate
+                  fill="freeze"
+                  attributeName="stroke-dashoffset"
+                  begin="0.4s"
+                  dur="0.4s"
+                  values="16;0"
+                />
+              </path>
+            </g>
+          </svg>
+        </li>
+        <li class="w-1/2 mx-auto">
+          <a
+            [routerLink]="['/']"
+            (click)="closeMenu()"
+            class="btn btn-ghost accent-hover rounded-[30px] text-lg"
+            >Câu đố<svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+            >
+              <path
+                fill="#fff"
+                d="M12.6 12L8 7.4L9.4 6l6 6l-6 6L8 16.6z"
+              /></svg
+          ></a>
+        </li>
+        <li class="w-1/2 mx-auto">
+          <a
+            [routerLink]="['/terms']"
+            (click)="closeMenu()"
+            class="btn btn-ghost accent-hover rounded-[30px] text-lg"
+            routerLinkActive="router-link-active"
+            >Trung tâm đồng ý<svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+            >
+              <path
+                fill="#fff"
+                d="M12.6 12L8 7.4L9.4 6l6 6l-6 6L8 16.6z"
+              /></svg
+          ></a>
+        </li>
+        <li class="w-1/2 mx-auto">
+          <a
+            [routerLink]="['/about']"
+            (click)="closeMenu()"
+            class="btn btn-ghost accent-hover rounded-[30px] text-lg"
+            routerLinkActive="router-link-active"
+            >Về chúng tôi
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+            >
+              <path
+                fill="#fff"
+                d="M12.6 12L8 7.4L9.4 6l6 6l-6 6L8 16.6z"
+              /></svg
+          ></a>
+        </li>
+        <li class="w-1/2 mx-auto">
+          <a
+            [routerLink]="['/contacts']"
+            (click)="closeMenu()"
+            class="btn btn-ghost accent-hover rounded-[30px] text-lg"
+            routerLinkActive="router-link-active"
+            >Liên hệ<svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+            >
+              <path
+                fill="#fff"
+                d="M12.6 12L8 7.4L9.4 6l6 6l-6 6L8 16.6z"
+              /></svg
+          ></a>
+        </li>
+        <li class="w-1/2 mx-auto">
+          <a
+            [routerLink]="['/faq']"
+            (click)="closeMenu()"
+            class="btn btn-ghost accent-hover rounded-[30px] text-lg"
+            routerLinkActive="router-link-active"
+            >FAQ<svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+            >
+              <path
+                fill="#fff"
+                d="M12.6 12L8 7.4L9.4 6l6 6l-6 6L8 16.6z"
+              /></svg
+          ></a>
+        </li>
+        <!-- Privacy policy -->
+        <li class="w-1/2 mx-auto">
+          <a
+            [routerLink]="['/policy']"
+            (click)="closeMenu()"
+            class="btn btn-ghost accent-hover rounded-[30px] text-lg"
+            routerLinkActive="router-link-active"
+          >
+            Chính sách bảo mật<svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+            >
+              <path
+                fill="#fff"
+                d="M12.6 12L8 7.4L9.4 6l6 6l-6 6L8 16.6z"
+              /></svg
+          ></a>
+        </li>
+      </ul>
     </div>
   </div>
 </header>

@@ -5,9 +5,9 @@ import { ContactsModule } from './view/contacts/contacts.module';
 import { AboutModule } from './view/about/about.module';
 
 const routes: Routes = [
-  { path: '', redirectTo: 'quizzes', pathMatch: 'full' },
+  { path: '', redirectTo: 'main', pathMatch: 'full' },
   {
-    path: 'quizzes',
+    path: 'main',
     loadChildren: () =>
       import('./view/quiz-list/quiz-list.module').then((m) => m.QuizListModule),
   },
@@ -36,7 +36,22 @@ const routes: Routes = [
     loadChildren: () =>
       import('./view/contacts/contacts.module').then((m) => m.ContactsModule),
   },
-  { path: '**', redirectTo: '/quizzes', pathMatch: 'full' },
+  {
+    path: 'policy',
+    loadChildren: () =>
+      import('./view/police/police.module').then((m) => m.PoliceModule),
+  },
+  {
+    path: 'faq',
+    loadChildren: () =>
+      import('./view/faq/faq.module').then((m) => m.FaqModule),
+  },
+  {
+    path: 'terms',
+    loadChildren: () =>
+      import('./view/terms/terms.module').then((m) => m.TermsModule),
+  },
+  { path: '**', redirectTo: '/main', pathMatch: 'full' },
 ];
 
 const routerOptions: ExtraOptions = {

@@ -2,16 +2,16 @@
   <div class="container">
     <div class="result-wrapper">
       <h2 class="text-3xl text-center pb-3 text-balance">
-        Мы пришлем результат вам на почту 💌
+        Chúng tôi sẽ gửi kết quả qua email 💌
       </h2>
       <form
         [formGroup]="myForm"
         (ngSubmit)="!isCodeVisible ? sendForm() : submitFinalForm()"
-        class="form w-2/4 justify-center bg-base-100"
+        class="form w-2/4 justify-center bg-base-100 relative"
         auto-animate
       >
         <div class="form-wrapper">
-          <h3 class="text-3xl text-center pb-3">Введите данные:</h3>
+          <h3 class="text-3xl text-center pb-3">Nhập thông tin:</h3>
 
           <label class="input input-bordered flex items-center gap-1 relative">
             <svg
@@ -27,14 +27,14 @@
             <input
               type="text"
               class="grow"
-              placeholder="Имя"
+              placeholder="Tên"
               formControlName="name"
             />
             <small
               class="text-red-400 error"
               *ngIf="myForm.get('name')?.invalid && myForm.get('name')?.touched"
             >
-              Это поле обязательно
+              Trường này là bắt buộc
             </small>
           </label>
 
@@ -64,7 +64,7 @@
                 myForm.get('email')?.invalid && myForm.get('email')?.touched
               "
             >
-              Требуется действительный email
+              Vui lòng nhập email hợp lệ
             </small>
           </label>
 
@@ -87,24 +87,85 @@
             <input
               type="text"
               class="grow"
-              placeholder="Код"
+              placeholder="Mã"
               formControlName="code"
             />
             <small
               class="text-red-400 error"
               *ngIf="myForm.get('code')?.invalid && myForm.get('code')?.touched"
             >
-              Это поле обязательно
+              Trường này là bắt buộc
             </small>
+
+            <span
+              (click)="resendCode()"
+              class="link absolute bottom-[-20px] right-0 opacity-65 text-xs hover:opacity-100 transition"
+            >
+              Gửi lại?</span
+            >
           </label>
         </div>
         <button
-          [disabled]="!myForm.valid"
+          [disabled]="!myForm.valid || isSubmitting"
           type="submit"
-          class="btn btn-primary rounded-none"
+          class="btn btn-primary rounded-none flex items-center justify-center gap-2"
         >
-          {{ isCodeVisible ? "Отправить" : "Продолжить" }}
+          <!-- Спиннер + текст в одной строке -->
+          <span
+            *ngIf="isSubmitting"
+            class="loading loading-s loading-spinner text-accent w-2/4"
+          ></span>
+          <span>{{ isCodeVisible ? "Gửi" : "Tiếp tục" }}</span>
         </button>
+
+        <!-- АЛЕРТЫ -->
+        <div class="translate-center space-y-2 w-[90%] md:w-fit">
+          <div
+            role="alert"
+            class="alert alert-success transition-opacity duration-300 flex gap-4 items-center justify-center w-fit"
+            [class.opacity-0]="!showSuccess"
+            [class.opacity-100]="showSuccess"
+            *ngIf="showSuccess"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="h-6 w-6 shrink-0 stroke-current"
+              fill="none"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+              />
+            </svg>
+            <span>{{ alertMessage }}</span>
+          </div>
+
+          <div
+            role="alert"
+            class="alert alert-error transition-opacity duration-300 flex gap-4 items-center justify-center w-fit"
+            [class.opacity-0]="!showError"
+            [class.opacity-100]="showError"
+            *ngIf="showError"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="h-6 w-6 shrink-0 stroke-current"
+              fill="none"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"
+              />
+            </svg>
+            <span>{{ alertMessage }}</span>
+          </div>
+        </div>
       </form>
     </div>
   </div>

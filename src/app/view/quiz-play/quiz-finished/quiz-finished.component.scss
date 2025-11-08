@@ -1,0 +1,14 @@
+h5.text-2xl {
+  backdrop-filter: blur(2px);
+}
+@media (max-width: 768px) {
+  h5.text-2xl {
+    font-size: 35px;
+  }
+}
+
+.wrapper {
+  backdrop-filter: blur(2px);
+  position: relative;
+  z-index: 1;
+}

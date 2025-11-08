@@ -33,7 +33,18 @@
 
 @media (max-width: 768px) {
   .quiz-result.h-space {
-    padding: 40px 0;
-    margin-top: 150px;
+    padding: 20px 0 60px;
+    margin-top: 110px;
+  }
+  .quiz-result {
+    .form-wrapper {
+      display: flex;
+      flex-direction: column;
+      gap: 25px;
+      padding: 25px;
+    }
+    h3 {
+      padding-bottom: 0;
+    }
   }
 }

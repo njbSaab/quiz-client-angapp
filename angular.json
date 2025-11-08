@@ -39,13 +39,12 @@
     },
     "src/assets",
     "src/manifest.webmanifest",
-     "src/_redirects"
+    "src/_redirects"
   ],
   "styles": [
     "src/styles.scss"
   ],
-  "scripts": [],
-  "serviceWorker": "ngsw-config.json"
+  "scripts": []
 },
             "configurations": {
               "production": {
@@ -61,6 +60,7 @@
                     "maximumError": "4kB"
                   }
                 ],
+                "serviceWorker": "ngsw-config.json",
                 "outputHashing": "all"
               },
               "development": {

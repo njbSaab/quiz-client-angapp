@@ -12,6 +12,10 @@ import { QuizResultModule } from './view/quiz-result/quiz-result.module';
 import { AboutModule } from './view/about/about.module';
 import { ContactsModule } from './view/contacts/contacts.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { CorsBypassInterceptor } from './core/interceptors/cors-bypass.interceptor';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { ServiceWorkerModule } from '@angular/service-worker';  
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -28,9 +32,15 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     ContactsModule,
     CommonModule,
     QuizResultModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    ServiceWorkerModule.register('ngsw-worker.js', {
+      enabled: true,
+      registrationStrategy: 'registerWhenStable:30000'
+    })
   ],
-  providers: [],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: CorsBypassInterceptor, multi: true }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

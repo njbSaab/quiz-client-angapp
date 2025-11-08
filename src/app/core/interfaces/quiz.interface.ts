@@ -27,4 +27,5 @@ export interface Quiz {
   categoryId?: number;
   img?: string;
   rating?: number; 
+  isMainView: boolean;
 }

@@ -1,12 +1,26 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
+import { LayoutService } from './core/services/layout.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
 })
-export class AppComponent {
+export class AppComponent implements OnDestroy{
   title = 'quiz-app-ang';
+  showHeaderFooter = true;
+  private subscription: Subscription;
+
+  constructor(private layoutService: LayoutService) {
+    this.subscription = this.layoutService.showHeaderFooter$.subscribe(
+      visible => this.showHeaderFooter = visible
+    );
+  }
+
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
+  }
 
   toggleTheme(event: Event): void {
     const isChecked = (event.target as HTMLInputElement).checked; // Проверяем состояние чекбокса

@@ -1,20 +1,23 @@
 import { Component, OnInit } from '@angular/core';
-import { quizzes } from '../../../../assets/quiz-data'; // Путь к вашему массиву данных
+import { ScrollTopService } from '../../../core/services/scroll-top.service';
 
 @Component({
   selector: 'app-contacts',
   templateUrl: './contacts.component.html',
-  styleUrls: ['./contacts.component.scss']
+  styleUrls: ['./contacts.component.scss'],
 })
 export class ContactsComponent implements OnInit {
-  constructor() {}
+  quizCount = 0;
+  mail = 'hello@votevibe.club'
 
-  ngOnInit() {}
-
-  // Метод для загрузки всех квизов
-  async uploadQuizzes() {
-    for (const quiz of quizzes) {
-    }
-    console.log('All quizzes uploaded successfully');
+  constructor(    private scrollTop: ScrollTopService,
+    ) {}
+  
+    ngOnInit(): void {
+      this.scrollTop.toTop();
+    const stored = localStorage.getItem('quizCount');
+    this.quizCount = stored ? Number(stored) : 0;
   }
+
+
 }

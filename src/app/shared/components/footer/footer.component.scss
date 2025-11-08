@@ -1,9 +1,32 @@
 .footer {
   padding: 0;
   justify-content: center;
-
+  max-width: 1200px;
+  margin: 0 auto;
+  .footer-wrapper {
+    grid-template-columns: 30% 70%;
+  }
   .logo {
     width: 150px;
     height: 150px;
+  }
+  .item-mobile {
+    display: none;
+  }
+}
+@media (max-width: 768px) {
+  .footer {
+    .footer-wrapper {
+      grid-template-columns: 1fr;
+    }
+    .item-mobile {
+      display: block;
+    }
+    .item-desctop {
+      display: none;
+    }
+    .menu-desctop {
+      display: none;
+    }
   }
 }

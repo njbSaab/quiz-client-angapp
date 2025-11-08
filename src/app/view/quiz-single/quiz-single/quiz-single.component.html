@@ -1,5 +1,5 @@
 <div *ngIf="quiz; else notFound" class="quiz-detail h-space mx-w-1024">
-  <div class="card bg-gradient-base-180 pt-4">
+  <div class="card quiz-play-single pt-[4rem]">
     <div class="img-wrapper" [@blurIn]>
       <figure
         class="relative z-10 relative img-stack-wrapper"
@@ -50,11 +50,9 @@
       </figure>
     </div>
     <div class="card-body pt-0 quiz-container" (click)="arrowHide()">
-      <div class="details flex justify-between">
-        <div class="card-body-header flex justify-between items-center">
-          <span class="text-sm text-green-400">{{
-            quiz.createdAt | date
-          }}</span>
+      <div class="details flex justify-between pb-2">
+        <div class="card-body-header flex justify-between items-center w-full">
+          <span class="text-sm">{{ quiz.createdAt | date }}</span>
           <div class="rating">
             <input
               *ngFor="let star of [1, 2, 3, 4, 5]; let i = index"
@@ -67,17 +65,18 @@
         </div>
       </div>
       <div
-        class="collapse bg-gradient-base-180 text-center cursor-pointer hover:bg-gradient-base-180"
+        class="collapse bg-gradient-base-180 text-center cursor-pointer hover:bg-gradient-base-180 bg-shadow-cayn"
       >
         <input type="radio" name="my-accordion-1" />
-        <div class="collapse-title pb-0">
+        <div class="collapse-title pb-0 gap-0">
           <h2 class="card-title">{{ quiz.title }}</h2>
           <p>{{ quiz.description }}</p>
           <span
             class="text-center flex justify-center items-center"
-            *ngIf="isArrow"
+            *ngIf="quiz.firstPage"
           >
             <img
+              class="w-[30px]"
               src="https://icongr.am/feather/chevron-down.svg?size=50&color=c7c7c7"
               alt=""
             />
@@ -85,11 +84,7 @@
         </div>
         <div class="collapse-content">
           <p class="pt-2">
-            {{
-              quiz.firstPage
-                ? quiz.firstPage.split("_")[0].replace("img-", "")
-                : ""
-            }}
+            {{ quiz.firstPage }}
           </p>
         </div>
         <div
@@ -107,7 +102,7 @@
               <path d="M8 5v14l11-7z" />
             </svg>
           </span>
-          Играть
+          Bắt đầu 🤩
         </div>
       </div>
     </div>

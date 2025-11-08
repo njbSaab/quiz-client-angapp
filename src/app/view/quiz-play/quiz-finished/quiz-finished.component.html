@@ -1,19 +1,51 @@
-<div class="text-center overflow-hidden mx-w-1024">
+<div class="text-center overflow-hidden mx-w-1024 font-medium">
+  <div
+    class="wrapper relative flex w-fit mx-auto justify-center items-center gap-[20px]"
+  >
+    <div class="navbar-start w-fit cursor-pointer">
+      <img
+        class="w-[55px] md:w-[70px]"
+        src="https://i.ibb.co/Qvd3RYXX/5.png"
+        alt="VoteVibe"
+      />
+    </div>
+
+    <!-- НАЗВАНИЕ ПО ЦЕНТРУ -->
+    <div class="navbar-center flex-1 justify-center">
+      <span
+        class="text-3xl md:text-[2.1rem] font-semibold tracking-tight cursor-pointer"
+      >
+        <span
+          class="bg-gradient-to-r from-fuchsia-400 via-cyan-300 to-violet-400 bg-clip-text text-transparent"
+        >
+          VoteVibe
+        </span>
+      </span>
+    </div>
+  </div>
   <h5 class="text-2xl md:text-5xl pt-10 pb-5 relative z-10 confity-img">
-    🎉 Поздравляем 🎉
+    🎉 Chúc mừng 🎉
     <br />
-    <span class="text-xl md:text-3xl">🥳 Вы прошли викторину успешно 🥳</span>
+    <span class="text-xl md:text-3xl"
+      >🥳 Bạn đã hoàn thành bài kiểm tra thành công 🥳</span
+    >
   </h5>
   <img
-    class="absolute md:top-[0%] top-[17%] left-0 confity-anim"
-    src="https://www.pngall.com/wp-content/uploads/2016/07/Confetti-PNG-HD.png"
+    class="fixed confity"
+    src="https://cdn.pixabay.com/animation/2024/05/02/07/43/07-43-00-535_512.gif"
     alt=""
   />
+  <!-- src="https://www.pngall.com/wp-content/uploads/2016/07/Confetti-PNG-HD.png" -->
   <p *ngIf="quiz?.finalPage">{{ quiz?.finalPage }}</p>
   <div class="btn-grup flex flex-col gap-3 max-w-[400px] mx-auto relative z-10">
-    <button (click)="getResults.emit()" class="btn btn-success">
-      Получить результат
+    <button
+      (click)="getResults.emit()"
+      class="btn btn-success text-2xl md:h-[60px]"
+    >
+      Nhận kết quả
     </button>
-    <button (click)="reset.emit()" class="btn btn-ghost">Начать заново</button>
+    <button (click)="reset.emit()" class="btn btn-ghost rounded-[30px]">
+      Bắt đầu lại
+    </button>
   </div>
 </div>

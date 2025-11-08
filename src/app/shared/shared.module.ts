@@ -5,6 +5,8 @@ import { FooterComponent } from './components/footer/footer.component';
 import { ChangeBackgroundDirective } from './directives/change-background.directive';
 import { RandomBackgroundDirective } from './directives/random-class.directive';
 import { RouterLink, RouterModule } from '@angular/router';
+import { BannerComponent } from './components/banner/banner.component';
+import { FormsModule } from '@angular/forms';
 
 
 
@@ -13,18 +15,21 @@ import { RouterLink, RouterModule } from '@angular/router';
     HeaderComponent,
     FooterComponent,
     ChangeBackgroundDirective,
-    RandomBackgroundDirective
+    RandomBackgroundDirective,
+    BannerComponent
   ],
   imports: [
     CommonModule,
     RouterLink,
-    RouterModule
+    RouterModule,
+    FormsModule
   ],
   exports: [
     HeaderComponent,
     FooterComponent,
     ChangeBackgroundDirective,
-    RandomBackgroundDirective
+    RandomBackgroundDirective,
+    BannerComponent
   ]
 })
 export class SharedModule { }

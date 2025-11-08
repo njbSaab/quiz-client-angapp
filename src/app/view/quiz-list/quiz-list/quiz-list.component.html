@@ -1,13 +1,23 @@
-<div class="quiz-list h-space mx-w-1024">
+<ng-container *ngIf="isvisible">
+  <app-banner
+    [quizCount]="quizzes.length"
+    (close)="hideBanner()"
+    (showAll)="showAllQuizzes()"
+  ></app-banner>
+</ng-container>
+
+<div [ngClass]="{ 'h-space': !isvisible }" class="quiz-list mx-w-1200">
   <ng-container *ngIf="quizzes?.length; else loading">
-    <div class="container bg-gradient-primary-0 rounded-box py-5">
+    <div
+      class="bg-gradient-to-b from-fuchsia-500 to-cyan-400 rounded-box py-0 md:py-5"
+    >
       <div
-        class="quiz-list-wrapper grid grid-cols-1 sm:grid-cols-2"
+        class="quiz-list-wrapper grid grid-cols-1 lg:grid-cols-3"
         [@listAnimation]
       >
         <div
-          class="card quiz-item bg-card-gradient"
-          *ngFor="let quiz of quizzes"
+          class="card quiz-item bg-card-gradient max-w-[450px] mx-auto w-full"
+          *ngFor="let quiz of filteredQuizzes"
           [routerLink]="['/quiz', quiz.id]"
         >
           <figure>
@@ -48,7 +58,7 @@
                   <path d="M8 5v14l11-7z" />
                 </svg>
               </span>
-              Играть сейчас!
+              Bắt đầu 🤩
             </button>
           </div>
         </div>

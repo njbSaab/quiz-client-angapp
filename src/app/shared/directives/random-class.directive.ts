@@ -5,12 +5,11 @@ import { Directive, ElementRef, HostListener } from '@angular/core';
 })
 export class RandomBackgroundDirective {
   private colors: string[] = [
-    'oklch(51.01% 0.274 263.83)', // bright-blue
-    'oklch(53.18% 0.28 296.97)', // electric-violet
-    'oklch(47.66% 0.246 305.88)', // french-violet
-    'oklch(69.02% 0.277 332.77)', // vivid-pink
-    'oklch(58.42% 0.238 15.34)', // hot-red
-    'oklch(63.32% 0.24 31.68)',  // orange-red
+    '#0886e6',
+    '#cc26d5',
+    '#67e8f95d',
+    '#7d8eef',
+    '#7702ff'
   ];
 
   private usedColors: string[] = []; // Для хранения использованных цветов

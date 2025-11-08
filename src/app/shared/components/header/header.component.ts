@@ -6,18 +6,22 @@ import { Component } from '@angular/core';
   styleUrls: ['./header.component.scss'],
 })
 export class HeaderComponent {
-  onToggleChange(event: Event): void {
-    const checkbox = event.target as HTMLInputElement;
-    const navMenu = document.querySelector('.nav-menu');
+  isMenuOpen = false;
 
-    if (navMenu) {
-      if (checkbox.checked) {
-        navMenu.classList.add('show');
-        console.log('Menu opened');
-      } else {
-        navMenu.classList.remove('show');
-        console.log('Menu closed');
-      }
+  /** Синхронизация с нативным чекбоксом */
+  onToggle(event: Event): void {
+    const checkbox = event.target as HTMLInputElement;
+    this.isMenuOpen = checkbox.checked;
+  }
+
+  /** Закрытие меню + сброс чекбокса */
+  closeMenu(): void {
+    this.isMenuOpen = false;
+
+    // Сбрасываем чекбокс, чтобы анимация swap-rotate работала корректно
+    const checkbox = document.getElementById('menu-toggle') as HTMLInputElement;
+    if (checkbox) {
+      checkbox.checked = false;
     }
   }
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { trigger, transition, style, animate, query, stagger } from '@angular/animations';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Quiz, Question } from '../../../core/interfaces/quiz.interface';
@@ -6,6 +6,8 @@ import { QuizService } from '../../../core/services/quiz.service';
 import { TimerService } from '../../../core/services/timer.service';
 import { UserService } from '../../../core/services/user.service';
 import { UserResult, UserSessionData } from '../../../core/interfaces/user.interface';
+import { LayoutService } from '../../../core/services/layout.service';
+import { ScrollTopService } from '../../../core/services/scroll-top.service';
 
 @Component({
   selector: 'app-quiz-play',
@@ -45,7 +47,7 @@ import { UserResult, UserSessionData } from '../../../core/interfaces/user.inter
     ]),
   ],
 })
-export class QuizPlayComponent implements OnInit {
+export class QuizPlayComponent implements OnInit, OnDestroy {
   quiz: Quiz | undefined;
   questions: Question[] = [];
   currentQuestionIndex: number = 0;
@@ -64,12 +66,17 @@ export class QuizPlayComponent implements OnInit {
     private route: ActivatedRoute,
     private timerService: TimerService,
     private userService: UserService,
-    private router: Router
+    private router: Router,
+    private layoutService: LayoutService,
+    private scrollTop: ScrollTopService,
   ) {}
 
   ngOnInit(): void {
+    this.scrollTop.toTop();
+    this.layoutService.hideHeaderFooter();   // СКРЫВАЕМ хедер и футер
     const quizId = Number(this.route.snapshot.paramMap.get('id'));
     console.log('Quiz ID from route:', quizId);
+
 
     this.quizService.getQuizById(quizId).subscribe({
       next: (quiz) => {
@@ -118,6 +125,9 @@ export class QuizPlayComponent implements OnInit {
     this.timerService.progress$.subscribe((progress) => {
       this.progress = progress;
     });
+  }
+  ngOnDestroy(): void {
+    this.layoutService.showHeaderFooter();  // ВОЗВРАЩАЕМ при выходе (на случай back/refresh)
   }
 
   private loadQuizSession(quizId: number): void {
@@ -299,10 +309,20 @@ export class QuizPlayComponent implements OnInit {
         }[],
       };
 
-      this.userService.addUserResult(result);
+      // this.userService.addUserResult(result);
       this.isResultSaved = true;
-      // Очистка localStorage после сохранения результатов
-      localStorage.removeItem(`quiz_${this.quiz.id}_id`);
+      // ОСТАВЛЯЕМ В localStorage — для submit после верификации
+      localStorage.setItem(`quiz_${this.quiz.id}_final_result`, JSON.stringify({
+        quizId: this.quiz.id,
+        sessionId: this.userService.getSessionId(),
+        userId: this.userService.getUserId() || null,
+        score: this.totalPoints,
+        correctAnswersCount: this.correctAnswersCount,
+        totalQuestions: this.questions.length,
+        answers: this.answers.filter(a => a.answerId !== null),
+      }));
+
+      // Очистка прогресса (но НЕ final_result!)
       localStorage.removeItem(`quiz_${this.quiz.id}_currentQuestionIndex`);
       localStorage.removeItem(`quiz_${this.quiz.id}_correctAnswersCount`);
       localStorage.removeItem(`quiz_${this.quiz.id}_totalPoints`);

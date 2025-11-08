@@ -1,9 +1,8 @@
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { trigger, transition, style, animate, query, stagger } from '@angular/animations';
 import { QuizService } from '../../../core/services/quiz.service';
-import { UserService } from '../../../core/services/user.service';
 import { Quiz } from '../../../core/interfaces/quiz.interface';
-import { UserSessionData } from '../../../core/interfaces/user.interface';
+import { ScrollTopService } from '../../../core/services/scroll-top.service';
 
 @Component({
   selector: 'app-quiz-list',
@@ -24,91 +23,50 @@ import { UserSessionData } from '../../../core/interfaces/user.interface';
 })
 export class QuizListComponent implements OnInit {
   quizzes: Quiz[] = [];
-  private hasSessionSaved: boolean = false; // Флаг для предотвращения дублирования
+  isvisible: boolean = true;
+  filteredQuizzes: Quiz[] = [];
+  showAll = false; // флаг: показывать все или только main
 
   constructor(
     private quizService: QuizService,
-    private userService: UserService,
-    private cdr: ChangeDetectorRef
+    private cdr: ChangeDetectorRef,
+    private scrollTop: ScrollTopService,
   ) {}
 
   ngOnInit(): void {
+    this.scrollTop.toTop();
     this.loadQuizzes();
-    if (!this.hasSessionSaved) {
-      this.saveUserSession();
-      this.hasSessionSaved = true;
-    }
   }
 
   loadQuizzes(): void {
     this.quizService.getQuizzes().subscribe({
       next: (data: Quiz[]) => {
-        console.log('Полученные данные с сервера:', data);
-        this.quizzes = data.filter((quiz) => quiz.isActive);
-        this.cdr.markForCheck();
+        // Фильтруем только активные
+        this.quizzes = data.filter(q => q.isActive);
+        this.updateFilteredQuizzes();
       },
-      error: (error) => {
-        console.error('Ошибка загрузки квизов:', error);
-        this.cdr.markForCheck();
-      },
+      error: (err) => console.error('Ошибка загрузки квизов:', err),
     });
   }
 
-  async saveUserSession(): Promise<void> {
-    const browserInfo: any = {
-      userAgent: navigator.userAgent,
-      language: navigator.language,
-      screen: { width: window.screen.width, height: window.screen.height },
-      timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
-      cookiesEnabled: navigator.cookieEnabled,
-      platform: navigator.platform,
-      referrer: document.referrer,
-      ipAddress: await this.getIpAddress(),
-      geolocation: undefined,
-    };
-
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(
-        (position) => {
-          browserInfo.geolocation = {
-            latitude: position.coords.latitude,
-            longitude: position.coords.longitude,
-          };
-          this.sendSessionData(browserInfo);
-        },
-        (error) => {
-          console.warn('Геолокация не получена:', error);
-          this.sendSessionData(browserInfo);
-        }
-      );
+  // Обновляем отображаемые квизы
+  private updateFilteredQuizzes() {
+    if (this.showAll) {
+      this.filteredQuizzes = this.quizzes; // все активные
     } else {
-      this.sendSessionData(browserInfo);
+      this.filteredQuizzes = this.quizzes.filter(q => q.isMainView); // только main
     }
+    this.cdr.markForCheck();
   }
 
-  private async getIpAddress(): Promise<string | undefined> {
-    try {
-      const response = await fetch('https://api.ipify.org?format=json');
-      const data = await response.json();
-      return data.ip;
-    } catch (error) {
-      console.warn('Не удалось получить IP:', error);
-      return undefined;
-    }
+  // Вызывается из баннера
+  showAllQuizzes() {
+    this.showAll = true;
+    this.updateFilteredQuizzes();
+    this.hideBanner(); // скрываем баннер
   }
 
-  private sendSessionData(browserInfo: any): void {
-    const sessionData: UserSessionData = {
-      quizId: 0, // Используем 0 для списка квизов, но лучше уточнить логику
-      sessionId: this.userService.getSessionId(),
-      userId: this.userService.getUserId() || null,
-      currentQuestionIndex: 0,
-      correctAnswersCount: 0,
-      totalPoints: 0,
-      answers: [],
-      browserInfo,
-    };
-
-    this.userService.saveUserSession(sessionData);
+  hideBanner() {
+    this.isvisible = false;
   }
 }

@@ -1,9 +1,231 @@
-<footer class="footer">
-  <div class="container">
-    <div class="footer-logo">
-      <a class="logo-link btn-neutral">
-        <img class="logo" src="https://i.ibb.co/5X5Jxv13/quiz2.png" alt="" />
-      </a>
-    </div>
+<footer class="footer flex flex-col gap-0">
+  <div
+    class="container footer-wrapper md:w-[1000px] mx-auto md:grid md:items-center md:justify-center md:my-[40px]"
+  >
+    <ul
+      class="flex items-center justify-center menu min-h-full p-4 md:p-0 mx-auto text-center w-full pb-0 md:max-w-[1200px] md:w-full"
+    >
+      <li>
+        <div class="flex justify-center items-center gap-4 py-[15px]">
+          <div class="w-fit">
+            <img
+              class="w-[50px] md:w-[70px]"
+              src="https://i.ibb.co/Qvd3RYXX/5.png"
+              alt=""
+            />
+          </div>
+          <span
+            class="text-lg font-semibold tracking-tight cursor-pointer"
+            [routerLink]="['/']"
+          >
+            <span
+              class="bg-gradient-to-r from-fuchsia-400 via-cyan-300 to-violet-400 bg-clip-text text-transparent md:text-3xl"
+            >
+              VoteVibe
+            </span>
+          </span>
+        </div>
+      </li>
+      <li class="item-mobile">
+        <a
+          class="btn btn-ghost accent-hover list-item-active"
+          routerLinkActive="router-link-active"
+          [routerLink]="['/']"
+          [routerLinkActiveOptions]="{ exact: true }"
+          >Câu đố<svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+          >
+            <path fill="#fff" d="M12.6 12L8 7.4L9.4 6l6 6l-6 6L8 16.6z" /></svg
+        ></a>
+      </li>
+      <li class="item-mobile">
+        <a
+          class="btn btn-ghost accent-hover rounded-xl list-item-active"
+          routerLinkActive="router-link-active"
+          [routerLink]="['/terms']"
+          [routerLinkActiveOptions]="{ exact: true }"
+          >Trung tâm đồng ý
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+          >
+            <path fill="#fff" d="M12.6 12L8 7.4L9.4 6l6 6l-6 6L8 16.6z" /></svg
+        ></a>
+      </li>
+      <li class="item-mobile">
+        <a
+          class="btn btn-ghost accent-hover rounded-xl list-item-active"
+          routerLinkActive="router-link-active"
+          [routerLink]="['/about']"
+          [routerLinkActiveOptions]="{ exact: true }"
+          >Về chúng tôi
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+          >
+            <path fill="#fff" d="M12.6 12L8 7.4L9.4 6l6 6l-6 6L8 16.6z" /></svg
+        ></a>
+      </li>
+      <li class="item-mobile">
+        <a
+          class="btn btn-ghost accent-hover rounded-xl list-item-active"
+          [routerLink]="['/contacts']"
+          routerLinkActive="router-link-active"
+          [routerLinkActiveOptions]="{ exact: true }"
+        >
+          Liên hệ
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+          >
+            <path fill="#fff" d="M12.6 12L8 7.4L9.4 6l6 6l-6 6L8 16.6z" /></svg
+        ></a>
+      </li>
+      <li class="item-mobile">
+        <a
+          class="btn btn-ghost accent-hover rounded-xl list-item-active"
+          [routerLink]="['/faq']"
+          routerLinkActive="router-link-active"
+          [routerLinkActiveOptions]="{ exact: true }"
+          >FAQ
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+          >
+            <path fill="#fff" d="M12.6 12L8 7.4L9.4 6l6 6l-6 6L8 16.6z" /></svg
+        ></a>
+      </li>
+      <li class="item-mobile">
+        <a
+          [routerLink]="['/policy']"
+          routerLinkActive="router-link-active"
+          class="btn btn-ghost accent-hover rounded-xl"
+          >Chính sách bảo mật<svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+          >
+            <path fill="#fff" d="M12.6 12L8 7.4L9.4 6l6 6l-6 6L8 16.6z" /></svg
+        ></a>
+      </li>
+    </ul>
+    <ul
+      class="menu-desctop grid grid-cols-2 min-h-full p-4 pt-0 md:pb-0 text-center md:max-w-[500px] w-full mx-auto md:mr-0 md:ml-auto"
+    >
+      <li>
+        <a
+          class="btn btn-ghost accent-hover list-item-active text-lg"
+          routerLinkActive="router-link-active"
+          [routerLink]="['/']"
+          [routerLinkActiveOptions]="{ exact: true }"
+          >Câu đố<svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+          >
+            <path fill="#fff" d="M12.6 12L8 7.4L9.4 6l6 6l-6 6L8 16.6z" /></svg
+        ></a>
+      </li>
+      <li>
+        <a
+          class="btn btn-ghost accent-hover rounded-xl list-item-active text-lg"
+          routerLinkActive="router-link-active"
+          [routerLink]="['/terms']"
+          [routerLinkActiveOptions]="{ exact: true }"
+          >Trung tâm đồng ý
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+          >
+            <path fill="#fff" d="M12.6 12L8 7.4L9.4 6l6 6l-6 6L8 16.6z" /></svg
+        ></a>
+      </li>
+      <li>
+        <a
+          class="btn btn-ghost accent-hover rounded-xl list-item-active text-lg"
+          [routerLink]="['/about']"
+          routerLinkActive="router-link-active"
+          [routerLinkActiveOptions]="{ exact: true }"
+        >
+          Về chúng tôi
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+          >
+            <path fill="#fff" d="M12.6 12L8 7.4L9.4 6l6 6l-6 6L8 16.6z" /></svg
+        ></a>
+      </li>
+      <li>
+        <a
+          class="btn btn-ghost accent-hover rounded-xl list-item-active text-lg"
+          [routerLink]="['/contacts']"
+          routerLinkActive="router-link-active"
+          [routerLinkActiveOptions]="{ exact: true }"
+        >
+          Liên hệ
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+          >
+            <path fill="#fff" d="M12.6 12L8 7.4L9.4 6l6 6l-6 6L8 16.6z" /></svg
+        ></a>
+      </li>
+      <li>
+        <a
+          class="btn btn-ghost accent-hover rounded-xl list-item-active text-lg"
+          [routerLink]="['/faq']"
+          routerLinkActive="router-link-active"
+          [routerLinkActiveOptions]="{ exact: true }"
+          >FAQ
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+          >
+            <path fill="#fff" d="M12.6 12L8 7.4L9.4 6l6 6l-6 6L8 16.6z" /></svg
+        ></a>
+      </li>
+      <li>
+        <a
+          class="btn btn-ghost accent-hover rounded-xl list-item-active text-lg"
+          [routerLink]="['/policy']"
+          routerLinkActive="router-link-active"
+          [routerLinkActiveOptions]="{ exact: true }"
+          >Chính sách bảo mật
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+          >
+            <path fill="#fff" d="M12.6 12L8 7.4L9.4 6l6 6l-6 6L8 16.6z" /></svg
+        ></a>
+      </li>
+    </ul>
+    <!-- Privacy policy -->
   </div>
+  <span
+    class="text-xs flex items-center justify-center gap-4 pb-2 opacity-50 w-full"
+    >Copyright © 2025 «VoteVibe».
+  </span>
 </footer>

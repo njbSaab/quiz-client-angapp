@@ -8,19 +8,21 @@
 
     <!-- Анимация для вопроса -->
     <div
-      class="quiz-play-quistion bg-gradient-base-180 flex flex-col items-center justify-center relative quiz-container pt-5"
+      class="quiz-play-quistion quiz-play-single-transparet-base flex flex-col items-center justify-center relative quiz-container pt-5"
       [@questionFadeIn]="currentQuestionIndex"
       *ngIf="currentQuestionIndex < questions.length; else finished"
     >
       <div class="timer-box">
         <div
-          class="radial-progress bg-base-100"
+          class="radial-progress quiz-play-single"
           [style.--value]="progress"
           role="progressbar"
           [ngClass]="{
             'text-error': currentTime < 5,
-            'text-accent': currentTime >= 5 && currentTime < 10,
-            'text-primary': currentTime >= 10
+            'quiz-play-single4-erroe': currentTime < 5,
+            'text-primary-radial': currentTime >= 5 && currentTime < 10,
+            'quiz-play-single3': currentTime >= 5 && currentTime < 10,
+            'text-accent-radial': currentTime >= 10
           }"
         >
           <span class="countdown font-mono text-3xl">
@@ -36,13 +38,7 @@
           [src]="questions[currentQuestionIndex].image"
           alt="Question image"
         />
-        <h3
-          class="text-2xl my-4 px-2"
-          [ngClass]="{
-            'text-center': questions[currentQuestionIndex].text.length < 50,
-            'text-left': questions[currentQuestionIndex].text.length >= 50
-          }"
-        >
+        <h3 class="text-2xl my-4 px-2 text-center">
           {{ questions[currentQuestionIndex].text }}
         </h3>
       </div>
@@ -57,7 +53,7 @@
         *ngFor="let answer of questions[currentQuestionIndex]?.answers"
         (click)="onAnswerSelect(answer)"
         appRandomBackground
-        class="quiz-play-answers-item bg-gradient-base-0 flex items-center justify-center cursor-pointer text-center"
+        class="quiz-play-answers-item quiz-play-single-transparet-base2 flex items-center justify-center cursor-pointer text-center"
       >
         {{ answer.text }}
       </li>
@@ -70,6 +66,7 @@
     [quiz]="quiz"
     (reset)="resetProgress()"
     (getResults)="getResults()"
+    class="h-[66dvh] flex items-center justify-center"
   ></app-quiz-finished>
 </ng-template>
 
