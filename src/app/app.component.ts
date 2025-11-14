@@ -1,4 +1,4 @@
-import { Component, OnDestroy } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { LayoutService } from './core/services/layout.service';
 import { Subscription } from 'rxjs';
 
@@ -7,7 +7,7 @@ import { Subscription } from 'rxjs';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
 })
-export class AppComponent implements OnDestroy{
+export class AppComponent implements OnDestroy, OnInit{
   title = 'quiz-app-ang';
   showHeaderFooter = true;
   private subscription: Subscription;
@@ -16,6 +16,9 @@ export class AppComponent implements OnDestroy{
     this.subscription = this.layoutService.showHeaderFooter$.subscribe(
       visible => this.showHeaderFooter = visible
     );
+  }
+  ngOnInit(): void {
+
   }
 
   ngOnDestroy() {
@@ -27,4 +30,5 @@ export class AppComponent implements OnDestroy{
     const theme = isChecked ? 'acid' : 'dracula'; // Выбираем тему
     document.documentElement.setAttribute('data-theme', theme); // Устанавливаем тему
   }
+
 }

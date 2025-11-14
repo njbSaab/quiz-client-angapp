@@ -126,6 +126,7 @@
             [class.opacity-0]="!showSuccess"
             [class.opacity-100]="showSuccess"
             *ngIf="showSuccess"
+            [attr.data-gtm-message]="alertMessage"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"

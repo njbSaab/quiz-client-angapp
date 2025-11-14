@@ -26,6 +26,7 @@ export interface UserResult {
   score: number;
   answers: { questionId: number; answerId: number }[];
   createdAt?: string; // Сделано необязательным, так как клиент не передает
+  geo?: string;
 }
 
 export interface User {
@@ -36,4 +37,5 @@ export interface User {
   sessions?: UserSessionData[];
   results?: UserResult[];
   uuid?: string;
+  geo?: string;
 }

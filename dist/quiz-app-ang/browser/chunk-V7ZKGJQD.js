@@ -1,1 +1,0 @@
-import{C as t}from"./chunk-BBSPNL62.js";var a=(()=>{class o{toTop(){window.scrollTo({top:0,left:0,behavior:"smooth"})}toTopInstant(){window.scrollTo(0,0)}static \u0275fac=function(r){return new(r||o)};static \u0275prov=t({token:o,factory:o.\u0275fac,providedIn:"root"})}return o})();export{a};

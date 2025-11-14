@@ -7,6 +7,7 @@ import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../../environments/environment';
 import { UserResult } from '../../../core/interfaces/user.interface';
 
+
 @Component({
   selector: 'app-quiz-result',
   templateUrl: './quiz-result.component.html',
@@ -114,7 +115,7 @@ export class QuizResultComponent implements OnInit {
       .post(`${this.apiUrl}/email/verify`, {
         site_url: window.location.origin,
         email_user: this.tempEmail,
-        email_admin: 'admin@1xarea.com',
+        email_admin: 'web@votevibe.club',
         encrypted_code: this.encryptedCode,
         code: code,
         name_user: this.tempName,
@@ -127,15 +128,31 @@ export class QuizResultComponent implements OnInit {
             name: this.tempName,
             email: this.tempEmail,
             sessionId: this.userService.getSessionId(),
+            geo: "vn"
           }).subscribe({
             next: () => {
               // 3. ОТПРАВЛЯЕМ РЕЗУЛЬТАТ НА БЭК
               const finalResult = localStorage.getItem(`quiz_${this.quizId}_final_result`);
               if (finalResult) {
                 const result = JSON.parse(finalResult);
-                this.userService.addUserResult(result); // ← теперь отправляем
+                const resultWithGeo: UserResult = {
+                  ...result,
+                  geo: "vn" // ← ВОТ ЭТО ВСЁ, ЧТО НУЖНО
+                };
+                // this.userService.addUserResult(result); // ← теперь отправляем
+                this.userService.addUserResult(resultWithGeo);
               }
-
+              // ОТПРАВЛЯЕМ СОБЫТИЕ В GTM — 100% РАБОТАЕТ В ANGULAR
+              (window as any).dataLayer = (window as any).dataLayer || [];
+              (window as any).dataLayer.push({
+                event: 'form_submit_success',
+                quiz_id: this.quizId,
+                user_name: this.tempName,
+                user_email: this.tempEmail,
+                geo: 'vn',
+                action: 'quiz_completed',
+                timestamp: new Date().toISOString()
+              });
               // 4. Очищаем localStorage
               localStorage.removeItem(`quiz_${this.quizId}_final_result`);
               localStorage.removeItem(`quiz_${this.quizId}_id`);
@@ -166,7 +183,7 @@ export class QuizResultComponent implements OnInit {
   
     this.http
       .post(`${this.apiUrl}/email/send-code`, {
-        site_url: window.location.origin,
+        site_url: window.location.origin + '/quvi',
         email_user: this.tempEmail,
       })
       .subscribe({

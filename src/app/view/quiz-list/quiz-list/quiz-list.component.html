@@ -7,7 +7,7 @@
 </ng-container>
 
 <div [ngClass]="{ 'h-space': !isvisible }" class="quiz-list mx-w-1200">
-  <ng-container *ngIf="quizzes?.length; else loading">
+  <ng-container *ngIf="quizzes?.length; else loading" >
     <div
       class="bg-gradient-to-b from-fuchsia-500 to-cyan-400 rounded-box py-0 md:py-5"
     >
@@ -19,6 +19,10 @@
           class="card quiz-item bg-card-gradient max-w-[450px] mx-auto w-full"
           *ngFor="let quiz of filteredQuizzes"
           [routerLink]="['/quiz', quiz.id]"
+          data-gtm-card
+          [attr.data-gtm-quiz-id]="quiz.id"
+          [attr.data-gtm-title]="quiz.title"
+          [attr.data-gtm-action]="'click_card'"
         >
           <figure>
             <img

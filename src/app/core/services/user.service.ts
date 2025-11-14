@@ -182,12 +182,14 @@ addUser(user: {
   email: string; 
   sessionId: string; 
   userId?: string | null; 
+  geo: "vn"
 }): Observable<any> {
   const userData = {
     name: user.name,
     email: user.email,
     sessionId: user.sessionId,
     userId: user.userId || null,
+    geo: user.geo
   };
 
   return this.http.post(`${this.apiUrl}/users`, userData, {

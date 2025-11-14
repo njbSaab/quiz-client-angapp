@@ -1,6 +1,6 @@
 <header class="header">
   <!-- ОСНОВНАЯ НАВИГАЦИЯ -->
-  <div class="navbar glass">
+  <div class="navbar glass relative">
     <!-- ЛОГО СЛЕВА -->
     <div class="navbar-start w-fit cursor-pointer" [routerLink]="['/']">
       <img
@@ -23,7 +23,17 @@
         </span>
       </span>
     </div>
-
+    <div class="btn-group">
+      <button 
+            *ngIf="showInstallButton"
+            (click)="installPwa()"
+            class="absolute top-[15px] bottom-0 left-auto right-[65px] md:right-[75px] -translate-x-1/2 
+            btn btn-circle bg-gradient-to-r to-cyan-400  from-green-400 
+            font-bold rounded-full shadow-2xl 
+            flex items-center z-50 animate-bounce text-black">
+            <svg xmlns="http://www.w3.org/2000/svg" class="text-black" width="32" height="32" viewBox="0 0 24 24"><!-- Icon from Google Material Icons by Material Design Authors - https://github.com/material-icons/material-icons/blob/master/LICENSE --><path fill="currentColor" d="M12 4c4.41 0 8 3.59 8 8s-3.59 8-8 8s-8-3.59-8-8s3.59-8 8-8m0-2C6.48 2 2 6.48 2 12s4.48 10 10 10s10-4.48 10-10S17.52 2 12 2m1 10V8h-2v4H8l4 4l4-4z"/></svg>
+        </button>
+    </div>
     <!-- КНОПКА МЕНЮ (ЕДИНАЯ!) -->
     <div class="navbar-end w-fit">
       <label
